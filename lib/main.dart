@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //  initialRoute: '/signup', 
-      //  routes: {
-      //    '/signup': (context) => Singup(),
-      //   '/login': (context) => Login(), 
-      //   '/home': (context) => Visual(),
-      // },
+       initialRoute: '/signup', 
+       routes: {
+         '/signup': (context) => Singup(),
+        '/login': (context) => Login(), 
+        '/home': (context) => Visual(),
+      },
       title: 'Flutter Demo',
       
       theme: ThemeData(
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
             )
        )
       ),
-      home: const Setting(),
+      home: const Singup(),
       debugShowCheckedModeBanner: false,
     );
   }

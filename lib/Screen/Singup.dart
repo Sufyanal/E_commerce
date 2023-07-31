@@ -55,6 +55,7 @@ class _SingupState extends State<Singup> {
           },
           child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

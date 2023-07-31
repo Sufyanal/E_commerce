@@ -59,6 +59,7 @@ class _LoginState extends State<Login> {
           },
           child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
