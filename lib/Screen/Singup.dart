@@ -1,5 +1,6 @@
 import 'dart:io';
 
+
 import 'package:ecommerce/Screen/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,44 +14,35 @@ class Singup extends StatefulWidget {
 }
 
 class _SingupState extends State<Singup> {
-  final Usernamecontroller = TextEditingController();
-  final Useremailcontroller = TextEditingController();
-  final Userpasswordcontroller = TextEditingController();
+  TextEditingController _Usernamecontroller = TextEditingController();
+    TextEditingController _Useremailcontroller = TextEditingController();
+  TextEditingController _Userpasswordcontroller = TextEditingController();
 
+  bool passwordVisible = true;
+  bool _isTextFieldEmpty = true; // Variable to track if the TextField is empty
 
-  bool passwordVisible = false;
- 
-   SaveData(String Usernamecontroller,String Useremailcontroller,String Userpasswordcontroller)async{
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("Name", Usernamecontroller);
-    prefs.setString("Name", Useremailcontroller);
-    prefs.setString("Name", Userpasswordcontroller);
-   }
-
-   ShowData(String Usernamecontroller,String Useremailcontroller,String Userpasswordcontroller)async{
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-     prefs.getString( Usernamecontroller);
-     prefs.getString( Useremailcontroller);
-     prefs.getString( Userpasswordcontroller);
-    });
-     
-   
-   
-   }
-   
- 
-   
-
-  
-  
-  String? _password;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
+    _Usernamecontroller.addListener(_handleTextFieldChange);
+   _Useremailcontroller.addListener(_handleTextFieldChange);
+    _Userpasswordcontroller.addListener(_handleTextFieldChange);
+    
   }
+
+  void _handleTextFieldChange() {
+    // Update the _isTextFieldEmpty variable based on the TextField's content
+    setState(() {
+      _isTextFieldEmpty = _Usernamecontroller.text.isEmpty;
+      _isTextFieldEmpty = _Useremailcontroller.text.isEmpty;
+      _isTextFieldEmpty = _Userpasswordcontroller.text.isEmpty;
+    });
+  }
+ 
+
+  
+  String? _password;
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,116 +74,127 @@ class _SingupState extends State<Singup> {
 
            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: TextField(
-                controller:  Usernamecontroller,
-                style: Theme.of(context).textTheme.bodyLarge,
-                textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                
-                 fillColor: Color(0xff2A2C36),
-                filled: true,
-               hintText: "Full name",
-              labelText: "Name",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                ),
-                focusColor: Colors.blue,
-               hintStyle: TextStyle(
-                color: Color(0xff828282),
-                fontWeight: FontWeight.w400
-               ),
-               border: OutlineInputBorder(
-                borderSide: BorderSide(
+              child: SingleChildScrollView(
+                child: TextField(
+                  controller:  _Usernamecontroller,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  
+                   fillColor: Color(0xff2A2C36),
+                  filled: true,
+                 hintText: "Full name",
+                labelText: "Name",
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                  ),
+                  focusColor: Colors.blue,
+                 hintStyle: TextStyle(
                   color: Color(0xff828282),
+                  fontWeight: FontWeight.w400
+                 ),
+                 border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xff828282),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+                 ),
+                 
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-               ),
-               
+                           ),
               ),
-                         ),
             ),
              const SizedBox(height: 10,),
 
              Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: TextField(
-                controller: Useremailcontroller,
-                   style: Theme.of(context).textTheme.bodyLarge,
-                textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                fillColor: Color(0xff2A2C36),
-                filled: true,
-                labelText: "Email",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                ),
-               hintText: "Email Address",
-               hintStyle: TextStyle(
-                color: Color(0xff828282),
-                fontWeight: FontWeight.w400
-               ),
-               border: OutlineInputBorder(
-                borderSide: BorderSide(
+              child: SingleChildScrollView(
+                child: TextField(
+                  controller: _Useremailcontroller,
+                     style: Theme.of(context).textTheme.bodyLarge,
+                  textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  fillColor: Color(0xff2A2C36),
+                  filled: true,
+                  labelText: "Email",
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                  ),
+                 hintText: "Email Address",
+                 hintStyle: TextStyle(
                   color: Color(0xff828282),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-               ),
-              ),          ),
+                  fontWeight: FontWeight.w400
+                 ),
+                 border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xff828282),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+                 ),
+                ),          ),
+              ),
             ),
               const SizedBox(height:5 ,),
                  Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: TextFormField(
-                controller: Userpasswordcontroller,
-               obscuringCharacter: "*",
-                   style: Theme.of(context).textTheme.bodyLarge,
-                textInputAction: TextInputAction.done,
-              decoration:  InputDecoration(
-                 fillColor: Color(0xff2A2C36),
-                filled: true,
-                suffixIcon: IconButton(
-                  onPressed: (){
-                    setState(() {
-                      passwordVisible = !passwordVisible;
-                    });
-                  },
-                   icon: Icon(passwordVisible
-                   ? Icons.visibility_off
-                   : Icons.visibility,color: Colors.white,
-                   )
-                   ),
-               hintText: "Password",
-               hintStyle: const TextStyle(
-                color: Color(0xff828282),
-                fontWeight: FontWeight.w400),
-                  border:  const OutlineInputBorder(
-                borderSide: BorderSide(
+              child: SingleChildScrollView(
+                child: TextFormField(
+                  controller: _Userpasswordcontroller,
+                 obscuringCharacter: "*",
+                     style: Theme.of(context).textTheme.bodyLarge,
+                  textInputAction: TextInputAction.done,
+                decoration:  InputDecoration(
+                   fillColor: Color(0xff2A2C36),
+                  filled: true,
+                  suffixIcon: IconButton(
+                    onPressed: (){
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                     icon: Icon(passwordVisible
+                     ? Icons.visibility_off
+                     : Icons.visibility,color: Colors.white,
+                     )
+                     ),
+                 hintText: "Password",
+                 hintStyle: const TextStyle(
                   color: Color(0xff828282),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-               ),
+                  fontWeight: FontWeight.w400),
+                    border:  const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xff828282),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
                  ),
-           validator: (val) => val!.length < 6 ? 'Password too short.' : null,
-              onSaved: (val) => _password = val,
-             obscureText: passwordVisible,
-             
-                
-               ),
+                   ),
+                         validator: (val) => val!.length < 6 ? 'Password too short.' : null,
+                onSaved: (val) => _password = val,
+                           obscureText: passwordVisible,
+                           
+                  
+                 ),
+              ),
              
               ),          
             
              Row(
               mainAxisAlignment: MainAxisAlignment.end,
                  children: [
-                   const Text("Already have an account?",
-                     style:TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                     )
-                     ),
+                   InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                    },
+                     child: const Text("Already have an account?",
+                       style:TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17,
+                       )
+                       ),
+                   ),
                      Icon(Icons.arrow_forward,color: Theme.of(context).colorScheme.error,)
                  ],
                ),
@@ -199,11 +202,14 @@ class _SingupState extends State<Singup> {
             const SizedBox(height: 30,),
             InkWell(
              
-              onTap: () async {
-            
-                
+              onTap: ()   {
+               
+               
+               
+             _signup(context);
+               
               
-                 Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=>const Login() ));
+                
                },
                
                 
@@ -257,6 +263,21 @@ class _SingupState extends State<Singup> {
              ),
           
         );
+  }
+
+  void _signup (BuildContext context) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String enteredName = _Usernamecontroller.text.trim();
+    String enteredEmail = _Useremailcontroller.text.trim();
+    String enteredPassword = _Userpasswordcontroller.text.trim();
+    
+    // Save user information in Shared Preference
+    prefs.setString("Name", enteredName);
+    prefs.setString("email", enteredEmail);
+    prefs.setString("Password", enteredPassword);
+
+    _isTextFieldEmpty? null: Navigator.pushReplacementNamed(context, '/login');
+
   }
   
   }

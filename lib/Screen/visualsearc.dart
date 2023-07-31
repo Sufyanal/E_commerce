@@ -1,16 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:cross_file/src/types/interface.dart';
-import 'package:ecommerce/Modals/Image_modals.dart';
-import 'package:ecommerce/Modals/Rigister_modals.dart';
-import 'package:ecommerce/Screen/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'Home_Screen.dart';
 
 
 
 class Splash extends StatefulWidget {
-   Splash( {super.key, required String image,  });
+  final File? image;
+   Splash( {super.key, this. image,  });
 
     
   @override
@@ -20,33 +18,44 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
    
     File? image;
+   void Nextpage(){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Home()));
+    }
+
+    @override
+    void initState(){
+     Future.delayed(Duration(seconds: 5),Nextpage);
+     super.initState();
+    }
+
+
   @override
   Widget build(BuildContext context) {
-    void Nextpage(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
-    }
+ 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body:Center(
         child: Column(
+
           children: [
                
-              Image.file(
-      
-                image as File, 
-                height: 100,
-                width: 100,
-               )
+              Padding(
+                padding: const EdgeInsets.only(top: 150),
+                child: Image.file(
+                    
+                 widget.image !, 
+                  height: 250,
+                  width: 400,
+                 ),
+              ),
+              const SizedBox(height: 50,),
+              const Icon(Icons.search,size: 100,color: Color(0xffEF3651)),
+              Padding(
+                padding: const EdgeInsets.only(left: 70),
+                child: Text("Finding similar       results...",
+                style:GoogleFonts.metrophobic(fontSize: 34, ),),
+              )
              
-         
-                  //  CircleAvatar(
-                  // radius: 40,
-                  //    child: Image.file(
-                  //    image.path,
-                  //    height: 100,
-                  //     width: 30,
-                  //    ),
-                  //  ),
             
                
                   

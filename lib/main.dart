@@ -1,7 +1,15 @@
+import 'package:ecommerce/Screen/Homepage.dart';
+import 'package:ecommerce/Screen/Profilescreens.dart/MyOrder.dart';
+import 'package:ecommerce/Screen/Profilescreens.dart/OrderDetail.dart';
+import 'package:ecommerce/Screen/Profilescreens.dart/Setting.dart';
 import 'package:ecommerce/Screen/Singup.dart';
+import 'package:ecommerce/Screen/Visual.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'Screen/Home_Screen.dart';
+import 'Screen/Login.dart';
 
 
 
@@ -20,7 +28,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //  initialRoute: '/signup', 
+      //  routes: {
+      //    '/signup': (context) => Singup(),
+      //   '/login': (context) => Login(), 
+      //   '/home': (context) => Visual(),
+      // },
       title: 'Flutter Demo',
+      
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           color: Color(0xff1E1F28)
@@ -49,14 +64,14 @@ class MyApp extends StatelessWidget {
              color: Colors.black,
              fontWeight: FontWeight.w600,
             ),
-             bodyLarge: GoogleFonts.lato(
+             bodyLarge: GoogleFonts.metrophobic(
              fontSize: 19,
              color: Colors.white,
              fontWeight: FontWeight.w400,
             )
        )
       ),
-      home: const Singup(),
+      home: const Setting(),
       debugShowCheckedModeBanner: false,
     );
   }

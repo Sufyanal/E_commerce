@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:ecommerce/Modals/Image_modals.dart';
+
 import 'package:ecommerce/Screen/visualsearc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +13,7 @@ class Visual extends StatefulWidget {
 
 class _VisualState extends State<Visual> {
  
-  File? image;
+  File? pickimage;
   
  
 
@@ -54,7 +54,7 @@ class _VisualState extends State<Visual> {
               onTap: () async {
 
                  final ImagePicker picker = ImagePicker();
-                    XFile? image = await picker.pickImage(
+                  XFile? image = await picker.pickImage(
                         source: ImageSource.camera);
                     print(image?.name);
                     print(image?.path);
@@ -67,7 +67,7 @@ class _VisualState extends State<Visual> {
         await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => Splash(
-              image: image!.path,
+              image: pickimage!
             ),
           ),
         );
@@ -99,10 +99,18 @@ class _VisualState extends State<Visual> {
                     print(image?.path);
                     if (image != null) {
                       setState(() {
-                      
+                      pickimage = File(image.path);
                       });
                     }
-                    Navigator.pop(context);
+                 
+         Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => Splash(
+              image:pickimage!,
+            ),
+          ),
+        );
+    
               },
               child: Container(
                 decoration:    BoxDecoration(

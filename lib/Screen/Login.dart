@@ -1,7 +1,10 @@
+
 import 'package:ecommerce/Screen/Register.dart';
-import 'package:ecommerce/Screen/Visual.dart';
-import 'package:ecommerce/Screen/visualsearc.dart';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 
 class Login extends StatefulWidget {
@@ -12,11 +15,30 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final Usernamecontroller = TextEditingController();
-  final Userpasswordcontroller = TextEditingController();
+  TextEditingController _Usernamecontroller = TextEditingController();
+  TextEditingController _Userpasswordcontroller = TextEditingController();
 
 
-  bool passwordVisible = false;
+
+
+  bool passwordVisible = true;
+   bool _isTextFieldEmpty = true; // Variable to track if the TextField is empty
+
+  @override
+  void initState() {
+    super.initState();
+    _Usernamecontroller.addListener(_handleTextFieldChange);
+    _Userpasswordcontroller.addListener(_handleTextFieldChange);
+    
+  }
+
+  void _handleTextFieldChange() {
+    // Update the _isTextFieldEmpty variable based on the TextField's content
+    setState(() {
+      _isTextFieldEmpty = _Usernamecontroller.text.isEmpty;
+      _isTextFieldEmpty = _Userpasswordcontroller.text.isEmpty;
+    });
+  }
  
 
 
@@ -24,12 +46,7 @@ class _LoginState extends State<Login> {
   
   
   String? _password;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,77 +75,86 @@ class _LoginState extends State<Login> {
              ),
            ),
            const SizedBox(height: 40,),
-
            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: TextField(
-                style: Theme.of(context).textTheme.bodyLarge,
-                textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                
-                 fillColor: Color(0xff2A2C36),
-                filled: true,
-               hintText: "Full name",
-              labelText: "Name",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                ),
-                focusColor: Colors.blue,
-               hintStyle: TextStyle(
-                color: Color(0xff828282),
-                fontWeight: FontWeight.w400
-               ),
-               border: OutlineInputBorder(
-                borderSide: BorderSide(
+              child: SingleChildScrollView(
+                child: TextField(
+                  
+                  // enabled: false,
+                  controller: _Usernamecontroller,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  
+                   fillColor: Color(0xff2A2C36),
+                  filled: true,
+                 hintText: "Full name",
+                labelText: "Name",
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                  ),
+                  focusColor: Colors.blue,
+                 hintStyle: TextStyle(
                   color: Color(0xff828282),
+                  fontWeight: FontWeight.w400
+                 ),
+                 border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xff828282),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+                 ),
+                 
+                 
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-               ),
-               
+                           
+                           ),
               ),
-                         ),
             ),
              const SizedBox(height: 10,),
 
                  Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: TextFormField(
-                
-               obscuringCharacter: "*",
-                   style: Theme.of(context).textTheme.bodyLarge,
-                textInputAction: TextInputAction.done,
-              decoration:  InputDecoration(
-                 fillColor: Color(0xff2A2C36),
-                filled: true,
-                suffixIcon: IconButton(
-                  onPressed: (){
-                    setState(() {
-                      passwordVisible = !passwordVisible;
-                    });
-                  },
-                   icon: Icon(passwordVisible
-                   ? Icons.visibility_off
-                   : Icons.visibility,color: Colors.white,
-                   )
-                   ),
-               hintText: "Password",
-               hintStyle: const TextStyle(
-                color: Color(0xff828282),
-                fontWeight: FontWeight.w400),
-                  border:  const OutlineInputBorder(
-                borderSide: BorderSide(
+              child: SingleChildScrollView(
+                child: TextFormField(
+                //  enabled: false,
+                  controller: _Userpasswordcontroller,
+                 obscuringCharacter: "*",
+                     style: Theme.of(context).textTheme.bodyLarge,
+                  textInputAction: TextInputAction.done,
+                decoration:  InputDecoration(
+                   fillColor: Color(0xff2A2C36),
+                  filled: true,
+                  suffixIcon: IconButton(
+                    onPressed: (){
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                     icon: Icon(passwordVisible
+                     ? Icons.visibility_off
+                     : Icons.visibility,color: Colors.white,
+                     )
+                     ),
+                 hintText: "Password",
+                 hintStyle: const TextStyle(
                   color: Color(0xff828282),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-               ),
+                  fontWeight: FontWeight.w400),
+                    border:  const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xff828282),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
                  ),
-           validator: (val) => val!.length < 6 ? 'Password too short.' : null,
-              onSaved: (val) => _password = val,
-             obscureText: passwordVisible,
-             
-                
-               ),
+                   ),
+                         validator: (val) => val!.length < 6 ? 'Password too short.' : null,
+                onSaved: (val) => _password = val,
+                           obscureText: passwordVisible,
+                           
+                  
+                 ),
+              ),
              
               ),          
             
@@ -153,9 +179,10 @@ class _LoginState extends State<Login> {
              
             const SizedBox(height: 30,),
             InkWell(
-              onTap: () async {
+              onTap: ()  {
 
-                Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=>const Visual() ));
+                _login(context);
+       
               },
               child: Container(
                 decoration:   BoxDecoration(
@@ -204,6 +231,48 @@ class _LoginState extends State<Login> {
              ),
           
         );
+  }
+
+  void _login (BuildContext context) async{
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+    // Replace with your own login validation logic
+    
+    String savedName = prefs.getString('Name')?? '';
+      String savedPassword = prefs.getString('Password')?? '';
+
+    String enteredName = _Usernamecontroller.text.trim();
+    String enteredPassword = _Userpasswordcontroller.text.trim();
+
+    if (savedName == enteredName && savedPassword == enteredPassword) {
+      Navigator.pushReplacementNamed(context, '/home');
+
+    }else{
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+       builder: (context)=>
+        AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30))
+          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text("Error",style: Theme.of(context).textTheme.bodyLarge,),
+          content: Text('Invalid Password. Please try again',style: Theme.of(context).textTheme.bodyLarge,),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+             child: Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Text("OK",style: Theme.of(context).textTheme.bodyLarge,),
+             )),
+          ],
+        )
+       );
+    }
+
   }
   
   }
