@@ -15,11 +15,9 @@ class _detailState extends State<detail> {
       backgroundColor: Theme.of(context).colorScheme.primary,
        appBar: AppBar(
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder:(context)=>const orders()));
-          },
-          child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
+      leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
           title: const Center(child: Text("Order Details",style: TextStyle(fontSize: 18,color: Colors.white),)),
           actions: const [
              Padding(
@@ -29,79 +27,77 @@ class _detailState extends State<detail> {
           ],
       ),
 
-      body:  Center(
-        child: Column(
-          children: [
-            const Row(
+      body:  SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Center(
+          child: Column(
             children: [
-        
-              Padding(
-                padding: EdgeInsets.only(left: 20,top: 20),
-                child: Text("Order №1947034",style: TextStyle(color: Colors.white,fontSize: 16),),
-              ),
-              SizedBox(width: 130,),
-              Padding(
-                padding: EdgeInsets.only(top: 15),
-                child: Text("05-12-2019",style: TextStyle(color: Colors.grey,fontSize: 14),),
-              )
-            ],
-          ),
-            const SizedBox(height: 20,),
-             const Row(
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 20,),
-                    child: Text("Tracking number:",style: TextStyle(color: Colors.grey,fontSize: 14),),
-                  ),
-                  SizedBox(width: 5,),
-                  Text("IW3475453455",style: TextStyle(color: Colors.white,fontSize: 14),),
-                     SizedBox(width: 35,),
-              Text("Delivered",style: TextStyle(color: Color(0xff55D85A),fontSize: 14),)
-              ],
-            ),
-             const SizedBox(height: 20,),
               const Row(
               children: [
+          
                 Padding(
-                    padding: EdgeInsets.only(left: 20,),
-                    child: Text("3 items",style: TextStyle(color: Colors.white,fontSize: 14),),
-                  ),
-                
+                  padding: EdgeInsets.only(left: 20,top: 20),
+                  child: Text("Order №1947034",style: TextStyle(color: Colors.white,fontSize: 16),),
+                ),
+                SizedBox(width: 130,),
+                Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text("05-12-2019",style: TextStyle(color: Colors.grey,fontSize: 14),),
+                )
               ],
             ),
-            // items list
-            Column(
-             children: [
+              const SizedBox(height: 20,),
+               const Row(
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(left: 20,),
+                      child: Text("Tracking number:",style: TextStyle(color: Colors.grey,fontSize: 14),),
+                    ),
+                    SizedBox(width: 5,),
+                    Text("IW3475453455",style: TextStyle(color: Colors.white,fontSize: 14),),
+                       SizedBox(width: 35,),
+                Text("Delivered",style: TextStyle(color: Color(0xff55D85A),fontSize: 14),)
+                ],
+              ),
                const SizedBox(height: 20,),
-               _items("Assets/p.png"),
-               const SizedBox(height: 20,),
-                _items("Assets/p2.png"),
-                const SizedBox(height: 20,),
-                 _items("Assets/p4.png"),
-                 
-             ],
-             ),
-        
-            // items list
-            SizedBox(height: 20,),
-             Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-               child: Column(
+                const Row(
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(left: 20,),
+                      child: Text("3 items",style: TextStyle(color: Colors.white,fontSize: 14),),
+                    ),
+                  
+                ],
+              ),
+              // items list
+              Column(
+               children: [
+                 const SizedBox(height: 20,),
+                 _items("Assets/p.png"),
+                 const SizedBox(height: 20,),
+                  _items("Assets/p2.png"),
+                  const SizedBox(height: 20,),
+                   _items("Assets/p4.png"),
+                   
+               ],
+               ),
+          
+              // items list
+              SizedBox(height: 20,),
+               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Order information",style: TextStyle(fontSize: 14),),
-              // const SizedBox(height: 20,),
+               // const SizedBox(height: 20,),
                   _information(),
                   
                 ],
-               ),
-              ),
-                       )
-            
-            
-          ],
+               )
+              
+              
+            ],
+          ),
         ),
       ),
     );
@@ -228,12 +224,12 @@ Widget _information (){
                 ),
                 color: const Color((0xff2A2C36))
               ),
-              child:  InkWell(
+              child:  GestureDetector(
                    onTap: (){
                    
                    },
                 child: const Center(
-                  child: Text("Reorder",style: TextStyle(color: Colors.white,fontSize: 14),))),
+                  child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 14),))),
              ),
              const SizedBox(width: 10,),
               Container(
@@ -245,7 +241,7 @@ Widget _information (){
                 borderRadius: BorderRadius.circular(40),
                color: Color(0xffEF3651)
               ),
-              child:  InkWell(
+              child:  GestureDetector(
                    onTap: (){
                    
                    },

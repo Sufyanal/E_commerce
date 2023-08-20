@@ -21,11 +21,9 @@ class _ForgetState extends State<Forget> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            // Navigator.push(context, MaterialPageRoute(builder:(context)=>const Singup()));
-          },
-          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+        leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +88,7 @@ class _ForgetState extends State<Forget> {
             
             
             const SizedBox(height: 30,),
-            InkWell(
+            GestureDetector(
               onTap: () async {
 
                

@@ -64,7 +64,7 @@ class _ProfilState extends State<Profil> {
               scrollDirection: Axis.vertical,
               child: Column(
                      children: [
-                       InkWell(
+                       GestureDetector(
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const orders()));
                         },
@@ -75,7 +75,7 @@ class _ProfilState extends State<Profil> {
                          ),
                        ),
                        const Divider(height: 2,color: Colors.grey,),
-                        InkWell(
+                        GestureDetector(
                          child: ListTile(
                        title: Text("Shipping addresses",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16),),
                        subtitle: Text("3 ddresses",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 11,color: Colors.grey),),
@@ -83,7 +83,7 @@ class _ProfilState extends State<Profil> {
                          ),
                        ),
                        const Divider(height: 1,color: Colors.grey,),
-                        InkWell(
+                        GestureDetector(
                          child: ListTile(
                        title: Text("Visa  **34",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16),),
                        subtitle: Text("Payment methods",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 11,color: Colors.grey),),
@@ -91,7 +91,7 @@ class _ProfilState extends State<Profil> {
                          ),
                        ),
                        const Divider(height: 1,color: Colors.grey,),
-                        InkWell(
+                        GestureDetector(
                          child: ListTile(
                        title: Text("Promocodes",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16),),
                        subtitle: Text("You have special promocodes",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 11,color: Colors.grey),),
@@ -99,7 +99,7 @@ class _ProfilState extends State<Profil> {
                          ),
                        ),
                        const Divider(height: 1,color: Colors.grey,),
-                        InkWell(
+                        GestureDetector(
                          child: ListTile(
                        title: Text("My reviews",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16),),
                        subtitle: Text("Reviews for 4 items",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 11,color: Colors.grey),),
@@ -107,7 +107,7 @@ class _ProfilState extends State<Profil> {
                          ),
                        ),
                        const Divider(height: 1,color: Colors.grey,),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const Setting()));
                           },

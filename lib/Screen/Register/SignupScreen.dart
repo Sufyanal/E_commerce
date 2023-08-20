@@ -1,19 +1,19 @@
 import 'dart:io';
 
 
-import 'package:ecommerce/Screen/Login.dart';
+import 'package:ecommerce/Screen/Register/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Singup extends StatefulWidget {
-  const Singup({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<Singup> createState() => _SingupState();
+  State<SignupScreen> createState() => _SingupState();
 }
 
-class _SingupState extends State<Singup> {
+class _SingupState extends State<SignupScreen> {
   TextEditingController _Usernamecontroller = TextEditingController();
     TextEditingController _Useremailcontroller = TextEditingController();
   TextEditingController _Userpasswordcontroller = TextEditingController();
@@ -49,11 +49,9 @@ class _SingupState extends State<Singup> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            // Navigator.push(context, MaterialPageRoute(builder:(context)=>const Singup()));
-          },
-          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+        leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -184,7 +182,7 @@ class _SingupState extends State<Singup> {
              Row(
               mainAxisAlignment: MainAxisAlignment.end,
                  children: [
-                   InkWell(
+                   GestureDetector(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                     },
@@ -201,15 +199,13 @@ class _SingupState extends State<Singup> {
                ),
              
             const SizedBox(height: 30,),
-            InkWell(
+            GestureDetector(
              
               onTap: ()   {
                
                
                
              _signup(context);
-               
-              
                 
                },
                

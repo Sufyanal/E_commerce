@@ -1,5 +1,5 @@
 
-import 'package:ecommerce/Screen/Register.dart';
+import 'package:ecommerce/Screen/Register/Forget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _Usernamecontroller = TextEditingController();
+  TextEditingController _Useremailcontroller = TextEditingController();
   TextEditingController _Userpasswordcontroller = TextEditingController();
 
 
@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _Usernamecontroller.addListener(_handleTextFieldChange);
+    _Useremailcontroller.addListener(_handleTextFieldChange);
     _Userpasswordcontroller.addListener(_handleTextFieldChange);
     
   }
@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
   void _handleTextFieldChange() {
     // Update the _isTextFieldEmpty variable based on the TextField's content
     setState(() {
-      _isTextFieldEmpty = _Usernamecontroller.text.isEmpty;
+      _isTextFieldEmpty = _Useremailcontroller.text.isEmpty;
       _isTextFieldEmpty = _Userpasswordcontroller.text.isEmpty;
     });
   }
@@ -53,11 +53,9 @@ class _LoginState extends State<Login> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            // Navigator.push(context, MaterialPageRoute(builder:(context)=>const Singup()));
-          },
-          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+        leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -82,15 +80,15 @@ class _LoginState extends State<Login> {
                 child: TextField(
                   
                   // enabled: false,
-                  controller: _Usernamecontroller,
+                  controller: _Useremailcontroller,
                   style: Theme.of(context).textTheme.bodyLarge,
                   textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   
                    fillColor: Color(0xff2A2C36),
                   filled: true,
-                 hintText: "Full name",
-                labelText: "Name",
+                 hintText: "Email",
+                labelText: "Email",
                   labelStyle: TextStyle(
                     color: Colors.grey,
                     fontSize: 20,
@@ -162,7 +160,7 @@ class _LoginState extends State<Login> {
              Row(
               mainAxisAlignment: MainAxisAlignment.end,
                  children: [
-                   InkWell(
+                   GestureDetector(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: ((context) => const Forget())));
                     },
@@ -179,7 +177,7 @@ class _LoginState extends State<Login> {
                ),
              
             const SizedBox(height: 30,),
-            InkWell(
+            GestureDetector(
               onTap: ()  {
 
                 _login(context);
@@ -239,13 +237,13 @@ class _LoginState extends State<Login> {
     
     // Replace with your own login validation logic
     
-    String savedName = prefs.getString('Name')?? '';
+    String savedEmail = prefs.getString('email')?? '';
       String savedPassword = prefs.getString('Password')?? '';
 
-    String enteredName = _Usernamecontroller.text.trim();
+    String enteredEmail = _Useremailcontroller.text.trim();
     String enteredPassword = _Userpasswordcontroller.text.trim();
 
-    if (savedName == enteredName && savedPassword == enteredPassword) {
+    if (savedEmail == enteredEmail && savedPassword == enteredPassword) {
       Navigator.pushReplacementNamed(context, '/home');
 
     }else{

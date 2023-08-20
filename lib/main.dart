@@ -1,15 +1,18 @@
-import 'package:ecommerce/Screen/Homepage.dart';
-import 'package:ecommerce/Screen/Profilescreens.dart/MyOrder.dart';
-import 'package:ecommerce/Screen/Profilescreens.dart/OrderDetail.dart';
-import 'package:ecommerce/Screen/Profilescreens.dart/Setting.dart';
-import 'package:ecommerce/Screen/Singup.dart';
-import 'package:ecommerce/Screen/Visual.dart';
+
+
+
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
+
+
 import 'Screen/Home_Screen.dart';
-import 'Screen/Login.dart';
+
+import 'model.dart/Product_modals.dart';
+import 'model.dart/Review.dart';
 
 
 
@@ -17,8 +20,11 @@ import 'Screen/Login.dart';
 
 void main() {
 
-  
+
+
+
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -28,17 +34,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       initialRoute: '/signup', 
-       routes: {
-         '/signup': (context) => Singup(),
-        '/login': (context) => Login(), 
-        '/home': (context) => Visual(),
-      },
+      //  initialRoute: '/signup', 
+      //  routes: {
+      //    '/signup': (context) => SignupScreen(),
+      //   '/login': (context) => Login(), 
+      //   '/home': (context) => Visual(),
+      // },
       title: 'Flutter Demo',
-      
       theme: ThemeData(
+         
         appBarTheme: const AppBarTheme(
-          color: Color(0xff1E1F28)
+          centerTitle: true,
+          color: Color(0xff1E1F28),
+          elevation: 0,
         ),
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
@@ -69,11 +77,14 @@ class MyApp extends StatelessWidget {
              color: Colors.white,
              fontWeight: FontWeight.w400,
             )
-       )
+       ) 
       ),
-      home: const Singup(),
+      home: Home(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
+List <Product> favorite = [];
+
+  List <Review> reviews = [];

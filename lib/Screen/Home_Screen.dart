@@ -1,9 +1,10 @@
-import 'package:ecommerce/Screen/Homepage.dart';
-import 'package:ecommerce/Screen/Favorate.dart';
+
+import 'package:ecommerce/Favoraite/favorate.dart';
+import 'package:ecommerce/Screen/HOMe/MainScreen.dart';
 import 'package:ecommerce/Screen/Profilescreens.dart/MyOrder.dart';
 import 'package:ecommerce/Screen/Profilescreens.dart/Profile.dart';
-import 'package:ecommerce/Screen/Shop.dart';
-import 'package:ecommerce/Screen/bags.dart';
+import 'package:ecommerce/Screen/SHops/Shop.dart';
+import 'package:ecommerce/Screen/BAGS/Bags.dart';
 import 'package:flutter/material.dart';
 
 
@@ -18,10 +19,10 @@ class HomeState extends State<Home> {
  
 int currentIndex = 0;
   final List<Widget> tabs =const[    
-   HomePage(),
+   Main(),
    Shop(),
    Bags(),
-   Favorate(),
+   Favorate(favorite: [],),
    Profil(),  
   ];
   @override

@@ -1,6 +1,4 @@
-import 'package:ecommerce/Modals/Detail_modals.dart';
-import 'package:ecommerce/Screen/Home_Screen.dart';
-import 'package:ecommerce/Screen/Profilescreens.dart/Profile.dart';
+
 import 'package:flutter/material.dart';
 
 import 'OrderDetail.dart';
@@ -21,11 +19,9 @@ class _ordersState extends State<orders> {
       backgroundColor: Theme.of(context).colorScheme.primary,
        appBar: AppBar(
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder:(context)=>const Home()));
-          },
-          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+        leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
           actions: [
              Padding(
             padding: EdgeInsets.all(8.0),
@@ -187,7 +183,7 @@ class _ordersState extends State<orders> {
               ),
               color: const Color((0xff2A2C36))
             ),
-            child:  InkWell(
+            child:  GestureDetector(
                  onTap: (){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> detail()));
                  },

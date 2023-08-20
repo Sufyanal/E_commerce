@@ -15,17 +15,14 @@ class _SettingState extends State<Setting> {
     return Scaffold(
        backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-       leading: const Icon(Icons.arrow_back_ios,color: Colors.white,),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.search,color: Colors.white,),
-          ),
-        ],
+        leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
         elevation: 0,
       ),
         resizeToAvoidBottomInset: false,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
             Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -175,7 +172,10 @@ class _SettingState extends State<Setting> {
                 inactiveThumbColor: Color(0xff55D85A) ,
                 value: isswiched, 
                 onChanged: (value){
-               isswiched = value;
+               
+               setState(() {
+                 isswiched = value;
+               });
                 })
             ],
           ),
@@ -205,20 +205,21 @@ class _SettingState extends State<Setting> {
            const SizedBox(height: 10,),
 
                             Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+          
+            children:<Widget> [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Delivery status changes",style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16,)),
               ),
                SizedBox(width: 90,),
               
+            
               Switch(
                 activeColor: Color(0xff2A2C36),
                 activeTrackColor: Color(0xff2A2C36) ,
                 inactiveThumbColor:  Color(0xff2A2C36) ,
                 value: isswiched, 
-                onChanged: (value){
+                onChanged: (bool value){
                isswiched = value;
                 })
             ],

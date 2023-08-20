@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ecommerce/Screen/visualsearc.dart';
+import 'package:ecommerce/Screen/Register/VisualSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -21,15 +21,12 @@ class _VisualState extends State<Visual> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         elevation: 0,
-        title: Center(
-       child: Text('Visual search',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),),   
-        ),
-        leading: InkWell(
-          onTap: () {
-            // Navigator.push(context, MaterialPageRoute(builder:(context)=>const Singup()));
-          },
-          child: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+        title: Text('Visual search',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),),
+       leading: IconButton(
+            onPressed:() => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
 
       body: Container(
@@ -44,13 +41,13 @@ class _VisualState extends State<Visual> {
         ),
          Padding(
            padding: const EdgeInsets.only(top: 200,left: 10),
-           child: Text("Search for an outfit by taking a photo or uploading an image",
+           child: Text("Search for an outfit by taking \n a photo or uploading an image",
            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 24),
              ),
          ),
            
             const SizedBox(height: 30,),
-            InkWell(
+            GestureDetector(
               onTap: () async {
 
                  final ImagePicker picker = ImagePicker();
@@ -73,23 +70,25 @@ class _VisualState extends State<Visual> {
         );
       }
               },
-              child: Container(
-                decoration:   BoxDecoration(
-                   borderRadius: const BorderRadius.all(Radius.circular(20)),
-                   color: Theme.of(context).colorScheme.error
-
-                ),
-                height: 50,
-                width: 320,
-               child: Center(
-                 child: Text("TAKE A PHOTO",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white)
+              child: Center(
+                child: Container(
+                  decoration:   BoxDecoration(
+                     borderRadius: const BorderRadius.all(Radius.circular(20)),
+                     color: Theme.of(context).colorScheme.error
+              
                   ),
-               ),
+                  height: 50,
+                  width: 320,
+                 child: Center(
+                   child: Text("TAKE A PHOTO",
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white)
+                    ),
+                 ),
+                ),
               ),
             ),      
             const SizedBox(height: 30,),
-            InkWell(
+            GestureDetector(
               onTap: () async {
 
                final ImagePicker picker = ImagePicker();
@@ -112,20 +111,22 @@ class _VisualState extends State<Visual> {
         );
     
               },
-              child: Container(
-                decoration:    BoxDecoration(
-                   borderRadius:  BorderRadius.all(Radius.circular(20)),
-                   color: Theme.of(context).colorScheme.error,
-                   backgroundBlendMode: BlendMode.screen,
-                 
-                ),
-                height: 50,
-                width: 320,
-               child: Center(
-                 child: Text("UPLOAD AN IMAGE",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white)
+              child: Center(
+                child: Container(
+                  decoration:    BoxDecoration(
+                     borderRadius:  BorderRadius.all(Radius.circular(20)),
+                     color: Theme.of(context).colorScheme.error,
+                     backgroundBlendMode: BlendMode.screen,
+                   
                   ),
-               ),
+                  height: 50,
+                  width: 320,
+                 child: Center(
+                   child: Text("UPLOAD AN IMAGE",
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white)
+                    ),
+                 ),
+                ),
               ),
             ),
       ]),
