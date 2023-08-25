@@ -152,6 +152,8 @@ class _MainState extends State<Main> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
                 color: Theme.of(context).colorScheme.primary,
@@ -160,6 +162,8 @@ class _MainState extends State<Main> {
                 width: 120,
                 child: Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(
                         children: [
@@ -175,9 +179,9 @@ class _MainState extends State<Main> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 120, right: 5),
-                              height: 50,
-                              width: 50,
+                              margin: const EdgeInsets.only(top: 130, right: 5),
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(200),
                                 color: Theme.of(context).colorScheme.secondary,
@@ -218,7 +222,7 @@ class _MainState extends State<Main> {
                         ),
                         Text(
                           "${product.price}",
-                          style: const TextStyle(color: Colors.white, fontSize: 10),
+                          style: const TextStyle(color: Color(0xffEF3651), fontSize: 10),
                         )
                     ],
                   ),

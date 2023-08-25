@@ -42,8 +42,14 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   get: any
   lottie: ^2.4.0
+  intl: ^0.18.1
+  fluttertoast: ^8.2.2
+
+dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: any
+  
   
 
   # The "flutter_lints" package below contains a set of recommended lints to

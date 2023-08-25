@@ -31,7 +31,7 @@ class _SuccessState extends State<Success> {
 
                countinueShopping("CONTINUE SHOPPING",
                (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const Bags()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const Bags(cart: [],)));
                }
                )
 

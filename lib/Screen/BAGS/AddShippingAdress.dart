@@ -45,6 +45,7 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
        backgroundColor: Theme.of(context).colorScheme.primary,
      appBar: AppBar( 
           leading: IconButton(
@@ -56,56 +57,59 @@ void initState() {
       
       body: Padding(
         padding: const EdgeInsets.only(left: 20,right: 20,top: 5),
-        child: Column(
-          children: [
-            textField(name,"Full name"),
-            const SizedBox(height: 20,),
-            textField(address,"Address"),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              textField(name,"Full name"),
               const SizedBox(height: 20,),
-            textField(city,"City"),
-              const SizedBox(height: 20,),
-            textField(state,"State/Province/Region"),
-              const SizedBox(height: 20,),
-            textField(code,"Zip Code (Postal Code)"),
-              const SizedBox(height: 20,),
-            textField(country,"Country"),
-            
-             const SizedBox(height: 20,),
-             savebutton("Save", 
-             () {
-             print(name);
+              textField(address,"Address"),
+                const SizedBox(height: 20,),
+              textField(city,"City"),
+                const SizedBox(height: 20,),
+              textField(state,"State/Province/Region"),
+                const SizedBox(height: 20,),
+              textField(code,"Zip Code (Postal Code)"),
+                const SizedBox(height: 20,),
+              textField(country,"Country"),
               
-      if (name != null && address != null && city != null && state != null && code != null && country != null) {
-        setState(() {
-          adddetail(name!, address!, city!,  state!, code!,country!,);
-        });
-        Navigator.pop(context); 
-      } else {
-       showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Incomplete Information"),
-                      content: Text("Please fill in all the address details."),
-                      actions: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context); // Close the dialog
-                          },
-                          child: Text("OK"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-      }
-    },
-                  
-           
+               const SizedBox(height: 20,),
+               savebutton("Save", 
+               () {
+               print(name);
                 
-              )
-
-          ],
+              if (name != null && address != null && city != null && state != null && code != null && country != null) {
+          setState(() {
+            adddetail(name!, address!, city!,  state!, code!,country!,);
+          });
+          Navigator.pop(context); 
+              } else {
+               showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Incomplete Information"),
+                        content: Text("Please fill in all the address details."),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context); // Close the dialog
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+              }
+            },
+                    
+             
+                  
+                )
+        
+            ],
+          ),
         ),
       ),
 

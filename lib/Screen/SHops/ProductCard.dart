@@ -14,6 +14,7 @@ import '../../controller/bottomsheetcontroller.dart';
 import '../../main.dart';
 import '../../model.dart/Category.dart';
 import '../../model.dart/Product_modals.dart';
+import '../../model.dart/Review.dart';
 import '../../widget/BottomSheet/BottomSheet_Color.dart';
 import '../../widget/Button.dart';
 import 'Rating&Reviews.dart';
@@ -33,6 +34,7 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
     CategoryElement? categoryElement;
      ProductModal? productModal;
+     Reviews? reviews;
 
   Future<void> getProduct()async{
     http.Response response = await http.get(Uri.parse(
@@ -62,6 +64,17 @@ class _ProductCardState extends State<ProductCard> {
       }
     });
    }
+   void toggleAddtoCart(){
+  setState(() {
+   widget.product.addcart = !widget.product.addcart;
+    if (widget.product.addcart) {
+      cart.add(widget.product);
+    }else{
+      cart.remove(widget. product);
+    }
+  });
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -194,25 +207,26 @@ class _ProductCardState extends State<ProductCard> {
                   const SizedBox(height: 5,),
                   Row(
                     children: [
-                      RatingBar.builder(
-                       initialRating: 3,
-                         minRating: 0,
-                             direction: Axis.horizontal,
-                        allowHalfRating: true,
-                          itemCount: 5,
-                         itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Icon(
-                           Icons.star,
-                           color: Colors.amber,
-                                ),
-                         onRatingUpdate: (rating) {
-                            print(rating);
-                       },
+                        RatingBar(
+                    // initialRating: double.parse(reviews!.rating!),
+                    ignoreGestures: true,
+                    itemSize: 30,
+                    ratingWidget: RatingWidget(
+                      full: const Icon(Icons.star,color: Color(0xffFFBA49),),
+                       half: const Icon(Icons.star,color: Color(0xffFFBA49),),
+                        empty: const Icon(Icons.star,color: Colors.grey,),) ,
+                     onRatingUpdate:((value) {
+                       
+                     })),
+                           GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> RatingsAndReviewsScreen( product: widget. product ,) ) );
+                            },
+                             child: Text(
+                              "${widget.product.rating}",
+                              style: const TextStyle(color: Color(0xffF5F5F5), fontSize: 14),
+                                                     ),
                            ),
-                           Text(
-                            "${widget.product.rating}",
-                            style: const TextStyle(color: Color(0xffF5F5F5), fontSize: 14),
-                          ),
                     ],
                   ),
                  
@@ -222,20 +236,13 @@ class _ProductCardState extends State<ProductCard> {
                             style: const TextStyle(color: Color(0xffF5F5F5), fontSize: 14),
                           ),
                            const SizedBox(height: 5,),
-                      AddCartbutton("ADD TO CART",(){
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=> const Rating()));
-                      }),
-                      const SizedBox(height: 10,),
-             Center(
-               child: Container(
-                height: 8,
-                width: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white
-                ),
-               ),
-             ),
+                      AddCartbutton("ADD TO CART",()=>toggleAddtoCart(),
+                        
+                      
+                         
+                      ),
+                   
+            
              const SizedBox(height: 10,),
            const Divider(height: 1 ,color: Colors.white,),
              _Sizeinfo("Shipping info"),
@@ -400,15 +407,18 @@ class _ProductCardState extends State<ProductCard> {
   }
   }  
 
-   Widget AddCartbutton(String name,VoidCallback onPressed){
-    return  Button(name: name, onPressed: onPressed) ;
-                  
-  }
-
-   ListTile _Sizeinfo(name){
+   Widget AddCartbutton(String name,VoidCallback onPressed,){
+    return  Button(name: name, onPressed: onPressed);
+    }
+    
+     ListTile _Sizeinfo(name){
     return ListTile(
      title: Text(name,style:Theme.of(context).textTheme.bodyLarge), 
      trailing: const Icon(Icons.arrow_forward_ios_outlined,color: Colors.white,),
     );
   }
-}
+  
+                  
+  }
+
+  

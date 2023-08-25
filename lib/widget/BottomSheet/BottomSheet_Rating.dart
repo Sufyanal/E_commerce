@@ -1,22 +1,50 @@
 
+import 'package:ecommerce/model.dart/Review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:http/http.dart';
 
-
+import 'package:http/http.dart' as http;
 
 import '../../controller/bottomsheetcontroller.dart';
+import '../../model.dart/Product_modals.dart';
 
 class RatingSheet extends StatefulWidget {
 
-  const RatingSheet({super.key,required this.controller});
+  const RatingSheet({super.key,required this.controller,});
    final bottomsheetcontroller controller;
+  
   @override
   State<RatingSheet> createState() => _RatingSheetState();
 }
 
 class _RatingSheetState extends State<RatingSheet> {
-
-
+  ProductsReview? reviews;
+  double rating = 0.0; // Add this variable to store the selected rating
+  String reviewText = ''; 
+ void postReview() async {
+  try {
+      http.Response response = await post(
+          Uri.parse('https://ecommerce.salmanbediya.com/products/review/add'),
+          body: {
+            'product': widget.controller.toString(), // Replace with appropriate logic
+          'user': widget.controller.toString(), // Replace with appropriate logic
+          'rating': rating.toString(),
+          'reviewText': reviewText, });
+    if (response.statusCode == 200) {
+    
+      Navigator.pop(context);
+    
+        // Review posted successfully
+        print('Review posted successfully');
+      } else {
+        // Handle error
+        print('Error posting review');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }}
+  
 
   
   @override
@@ -39,22 +67,22 @@ class _RatingSheetState extends State<RatingSheet> {
                const SizedBox(height: 20,),
             Text("What is you rate?",style: Theme.of(context).textTheme.bodyLarge,),
             const SizedBox(height: 30,),
-            RatingBar.builder(
-                               initialRating: 0,
-                                 minRating: 0,
-                                 unratedColor: Colors.white,
-                                     direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                  itemCount: 5,
-                                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                itemBuilder: (context, _) => const Icon(
-                                   Icons.star,
-                                   color: Colors.amber,
-                                        ),
-                                 onRatingUpdate: (rating) {
-                                    print(rating);
-                               },
-                                   ),
+          RatingBar.builder(
+   initialRating: 0,
+   minRating: 1,
+   direction: Axis.horizontal,
+   allowHalfRating: true,
+   itemCount: 5,
+   itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+   itemBuilder: (context, _) => const Icon(
+     Icons.star,
+     color: Colors.white,
+   ),
+   onRatingUpdate: (rating) {
+     print(rating);
+   },
+),
+          
 
                        Text("Please share your opinion\nabout the product"
                        ,style: Theme.of(context).textTheme.bodyLarge), 
@@ -83,7 +111,7 @@ class _RatingSheetState extends State<RatingSheet> {
          const SizedBox(height: 9,),
           GestureDetector(
             onTap: (){
-              
+              postReview();
             },
             child: Container(
               height: 50,

@@ -29,7 +29,7 @@ class _Main2State extends State<Main2> {
      Product? product;
 
    Future <void> getProduct()async{
-    http.Response response = await http.get(Uri.parse("https://ecommerce.salmanbediya.com/products/getAll"));
+    http.Response response = await http.get(Uri.parse("https://ecommerce.salmanbediya.com/products/tag/sale/getAll"));
      http.Response salesresponse = await http.get(Uri.parse("https://ecommerce.salmanbediya.com/products/tag/new/getAll"));
     setState(() {
       salesitem = productModalFromJson(response.body);
@@ -100,7 +100,7 @@ class _Main2State extends State<Main2> {
                 height: 5,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 10),
                 child: Row(
                   children: [
                     Text(
@@ -130,7 +130,7 @@ class _Main2State extends State<Main2> {
                 ],
               ),
               Container(
-                height: 350,
+                height: 280,
                 padding: EdgeInsets.only(right: 10),
                 child: 
                 salesitem == null ? const Center(child:  CircularProgressIndicator(color: Colors.white,),) :
@@ -142,11 +142,8 @@ class _Main2State extends State<Main2> {
                       return _product_card(product);
                     }),
               ),
-                 SizedBox(
-              height: 5,
-            ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 10),
               child: Row(
                 children: [
                   Text(
@@ -209,16 +206,18 @@ class _Main2State extends State<Main2> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCard(product: product)));
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+        padding: const EdgeInsets.fromLTRB(10, 10, 5, 0),
         child: Column(
           children: [
             Container(
                 color: Theme.of(context).colorScheme.primary,
                 margin: EdgeInsets.all(8.0),
-                height: 300,
+                height: 250,
                 width: 120,
                 child: Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(children: [
                         Container(
@@ -233,21 +232,23 @@ class _Main2State extends State<Main2> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 120, right: 5),
-                              height: 50,
-                              width: 50,
+                              margin: EdgeInsets.only(top: 130, right: 5),
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(200),
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                              child: IconButton(onPressed:()=> togglefavorite(product)
-                                  , icon: Icon(
-                                    product.isfavorited?
-                                    Icons.favorite:
-                                    Icons.favorite_border,
-                                    color: product.isfavorited ? Colors.red : Colors.white,
-                                size: 30,
-                                  ))
+                              child: Center(
+                                child: IconButton(onPressed:()=> togglefavorite(product)
+                                    , icon: Icon(
+                                      product.isfavorited?
+                                      Icons.favorite:
+                                      Icons.favorite_border,
+                                      color: product.isfavorited ? Colors.red : Colors.white,
+                                  size: 20,
+                                    )),
+                              )
                             ),
                           ],
                         ),
@@ -272,7 +273,7 @@ class _Main2State extends State<Main2> {
                         ),
                         Text(
                           "${product.price}",
-                          style: const TextStyle(color: Colors.white, fontSize: 10),
+                          style: const TextStyle(color: Color(0xffEF3651), fontSize: 10),
                         )
                     ],
                   ),
@@ -291,8 +292,10 @@ class _Main2State extends State<Main2> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCard(product: product)));
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+        padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
                 color: Theme.of(context).colorScheme.primary,
@@ -301,6 +304,8 @@ class _Main2State extends State<Main2> {
                 width: 120,
                 child: Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(children: [
                         Container(
@@ -315,9 +320,9 @@ class _Main2State extends State<Main2> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 120, right: 5),
-                              height: 50,
-                              width: 50,
+                              margin: EdgeInsets.only(top: 130, right: 5),
+                             height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(200),
                                 color: Theme.of(context).colorScheme.secondary,
@@ -336,6 +341,8 @@ class _Main2State extends State<Main2> {
                         
                       ]),
                        Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                           Icon(Icons.star,color: Colors.yellow,size: 15,),
                            Icon(Icons.star,color: Colors.yellow,size: 15,),
@@ -355,7 +362,7 @@ class _Main2State extends State<Main2> {
                         ),
                         Text(
                           "${product.price}",
-                          style: const TextStyle(color: Colors.white, fontSize: 10),
+                         style: const TextStyle(color: Color(0xffEF3651), fontSize: 10),
                         )
                     ],
                   ),

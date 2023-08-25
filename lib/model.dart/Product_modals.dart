@@ -32,7 +32,8 @@ class Product {
     int? reviews;
     DateTime? dateModified;
     DateTime? dateCreated;
-    bool isfavorited;
+    bool isfavorited,addcart;
+    dynamic quantity;
 
     Product({
         this.id,
@@ -47,6 +48,8 @@ class Product {
         this.dateModified,
         this.dateCreated,
         this.isfavorited=false,
+        this.addcart = false,
+        this.quantity
     });
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -63,6 +66,8 @@ class Product {
         dateModified: json["date_modified"] == null ? null : DateTime.parse(json["date_modified"]),
         dateCreated: json["date_created"] == null ? null : DateTime.parse(json["date_created"]),
     );
+
+
 
     Map<String, dynamic> toJson() => {
         "id": id,

@@ -1,9 +1,11 @@
 
 import 'package:ecommerce/Screen/BAGS/AddShippingAdress.dart';
 import 'package:ecommerce/Screen/BAGS/CheckOut.dart';
+import 'package:ecommerce/main.dart';
 import 'package:ecommerce/widget/Button.dart';
 import 'package:flutter/material.dart';
  import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import '../../model.dart/Checkoutmodel.dart';
 import '../../model.dart/Product_modals.dart';
 
@@ -12,7 +14,7 @@ import '../../model.dart/Product_modals.dart';
 
 
 class Bags extends StatefulWidget {
-  const Bags({super.key});
+  const Bags({super.key,required List  cart});
 
   @override
   State<Bags> createState() => _BagsState();
@@ -24,22 +26,10 @@ class _BagsState extends State<Bags> {
   
   int quantity = 1;
   int price = 0;
-     ProductModal? productModal;
-  @override
-  void initState() {
-    super.initState();
-    getProduct();
-  }
-   
+   double totalamount = 0.0;
+  
+  
  
-  Future<void> getProduct() async {
-    http.Response response = await http.get(Uri.parse(
-        "https://ecommerce.salmanbediya.com/products/getAll"));
-    print(response.body);
-    setState(() {
-      productModal = productModalFromJson(response.body);
-    });
-  }
 
  
 
@@ -74,12 +64,14 @@ class _BagsState extends State<Bags> {
            // ignore: sized_box_for_whitespace
            Container(
             height: 300,
-             child: productModal == null ? const Center(child:  CircularProgressIndicator(color: Colors.white,),) :
+             child:
+             
+             cart.isEmpty  ?Center(child: Lottie.asset("Animation/empty.json"),):
                    ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: productModal!.products!.length ,
+              itemCount: cart.length ,
              itemBuilder: (context, index) {
-               final product = productModal!.products![index];
+               final product = cart[index];
                return ProductCard( product,);
              },
                    ),
@@ -106,7 +98,7 @@ class _BagsState extends State<Bags> {
                 children: [
                  Text("Total amount:",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey,fontSize: 14),),
                  const Spacer(),
-                 Text("124\$",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),),
+                 Text(totalamount.toStringAsPrecision(2),style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),),
                 ],
               ),
             ),
@@ -133,7 +125,7 @@ class _BagsState extends State<Bags> {
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 10),
                 width: 350,
-                height: 90,
+                height: 104,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).colorScheme.secondary,
@@ -142,7 +134,7 @@ class _BagsState extends State<Bags> {
                   children: [
              Container(
                   width: 100,
-                  height: 100,
+                  height: 104,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: Theme.of(context).colorScheme.onBackground,
@@ -188,8 +180,13 @@ Spacer(),
                                     height: 30,
                                     child: FloatingActionButton(onPressed:(){
                                       setState(() {
-                                        if (quantity >1) {
+                                        if (quantity >0) {
                                           quantity--;
+                                           if (quantity == 0) {
+                                        product.addcart = false;
+                             cart.remove(product);
+}
+                                     
                                         }
                                       });
                                     },
@@ -198,7 +195,7 @@ Spacer(),
                                   ),
                                   const SizedBox(width: 10,),
                                    Text("$quantity",
-                                  style: TextStyle(color: Colors.white,fontSize: 15),),
+                                  style: const TextStyle(color: Colors.white,fontSize: 15),),
                                   const SizedBox(width: 10,),
                                   SizedBox(
                                     width: 30,
@@ -206,6 +203,7 @@ Spacer(),
                                     child: FloatingActionButton(onPressed:(){
                                       setState(() {
                                           quantity++;
+                                          product.price! * quantity;
                                           
                                       });
                                     },
@@ -215,7 +213,7 @@ Spacer(),
                                   const Spacer(),
                                    Padding(
                                      padding: const EdgeInsets.all(8.0),
-                                     child: Text("${product.price! * quantity } \$",style: const TextStyle(color: Colors.white,fontSize: 10)),
+                                     child: Text(     (double.parse(product.price!) * quantity).toStringAsFixed(2) ,style: const TextStyle(color: Colors.white,fontSize: 10)),
                                    ),
                                 ],
                               ),

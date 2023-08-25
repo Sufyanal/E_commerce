@@ -21,7 +21,7 @@ int currentIndex = 0;
   final List<Widget> tabs =const[    
    Main(),
    Shop(),
-   Bags(),
+   Bags(cart: [],),
    Favorate(favorite: [],),
    Profil(),  
   ];

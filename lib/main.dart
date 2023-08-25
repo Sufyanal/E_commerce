@@ -2,6 +2,8 @@
 
 
 
+import 'package:ecommerce/Screen/Register/SignupScreen.dart';
+import 'package:ecommerce/Screen/Register/VisualSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +13,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'Screen/Home_Screen.dart';
 
+import 'Screen/Register/Login.dart';
+import 'Screen/Register/Visual.dart';
+import 'Splash.dart';
 import 'model.dart/Product_modals.dart';
 import 'model.dart/Review.dart';
 
@@ -79,7 +84,7 @@ class MyApp extends StatelessWidget {
             )
        ) 
       ),
-      home: Home(),
+      home: Splash1(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -87,4 +92,8 @@ class MyApp extends StatelessWidget {
 
 List <Product> favorite = [];
 
-  List <Review> reviews = [];
+  List <Product> cart = [];
+  String userName="";
+String useremail="";
+String userId="";
+  
