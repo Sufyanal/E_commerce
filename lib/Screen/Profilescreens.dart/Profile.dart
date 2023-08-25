@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ecommerce/Screen/Profilescreens.dart/MyOrder.dart';
 import 'package:ecommerce/Screen/Profilescreens.dart/Setting.dart';
+import 'package:ecommerce/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -18,34 +19,8 @@ class Profil extends StatefulWidget {
 
 class _ProfilState extends State<Profil> {
 
-   User? user; // User object to store fetched user data
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData(); // Call the method to fetch user data
-  }
-
-  Future<void> fetchUserData() async {
-    try {
-      http.Response response = await put(
-        Uri.parse('https://ecommerce.salmanbediya.com/users/login'),
-        // Add any required headers or query parameters
-      );
-
-      if (response.statusCode == 200) {
-        // Assuming your API response is in JSON format
-        // Parse the response JSON and set user data
-        setState(() {
-          user = User.fromJson(jsonDecode(response.body));
-        });
-      } else {
-        // Handle error cases
-      }
-    } catch (e) {
-      // Handle exceptions
-    }
-  }
+  
+     
 
   String? email;
   String? password;
@@ -87,16 +62,15 @@ class _ProfilState extends State<Profil> {
                
               ),
               SizedBox(width: 10,),
-               if (user != null) ...[
+             
       Column(
         children: [
-          Text("${user!.name}", style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18)),
-          Text("${user!.email}", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14, color: Colors.grey)),
+          Text(userName, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18)),
+          Text(useremail, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14, color: Colors.grey)),
         ],
       ),
-    ] else ...[
-      CircularProgressIndicator(), // Display a loading indicator
-    ],
+
+  
           
             ],
           ),
