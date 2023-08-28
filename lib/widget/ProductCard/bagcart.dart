@@ -1,132 +1,27 @@
-
-
-import 'package:ecommerce/Screen/BAGS/checkOut.dart';
 import 'package:ecommerce/main.dart';
-
-import 'package:ecommerce/widget/button.dart';
+import 'package:ecommerce/model.dart/Product_modals.dart';
 import 'package:flutter/material.dart';
 
-import 'package:lottie/lottie.dart';
-import '../../model.dart/Checkoutmodel.dart';
-import '../../model.dart/Product_modals.dart';
-import '../../widget/productCard/Bagcart.dart';
 
 
+class BagsCart extends StatefulWidget {
+
+  Product product;
+  Function?state;
 
 
-
-class Bags extends StatefulWidget {
-  const Bags({super.key,required List  cart});
+  BagsCart({super.key,required this.product,required this.state});
 
   @override
-  State<Bags> createState() => _BagsState();
+  State<BagsCart> createState() => _BagsCartState();
 }
 
-class _BagsState extends State<Bags> {
-
-  
-  Product?productamount;
-  
+class _BagsCartState extends State<BagsCart> {
   int quantity = 1;
-  int price = 0;
-   double totalamount = 0.0;
-  
-  
- 
-
- 
-
-  
-   int currentIndex = 0;
+  double totalAmount = 0;
   @override
   Widget build(BuildContext context) {
-      void state ()=> setState(() {
-        
-      });
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        appBar: AppBar(
-        elevation: 0,
-          actions: const [
-             Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.search,color: Colors.white,),
-          ),
-          ],
-      ),
-
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-          
-          Text("My Bag",style: Theme.of(context).textTheme.bodyMedium,),
-      
-          const SizedBox(height: 5,),
-           // ignore: sized_box_for_whitespace
-           Container(
-            height: 300,
-             child:
-             
-             cart.isEmpty  ?Center(child: Lottie.asset("Animation/empty.json"),):
-                   ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: cart.length ,
-             itemBuilder: (context, index) {
-               final product = cart[index];
-               return BagsCart(
-                product: product,
-                state: state);
-             },
-                   ),
-           ),
-           const SizedBox(height: 10,),
-            TextField(
-              style: const TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    fillColor: Theme.of(context).colorScheme.secondary,
-                                    filled: true,
-                                    hintText:"Enter your promo code" ,
-                                    hintStyle: const TextStyle(color: Colors.white),
-                                    border: const OutlineInputBorder(
-                                     borderRadius: BorderRadius.all(Radius.circular(20))
-                                    ),
-                                   
-                                  ),
-                                  
-                                ),
-      
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                 Text("Total amount:",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey,fontSize: 14),),
-                 const Spacer(),
-                 Text("$totalamount",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20,),
-
-            checkOutbutton("Check Out", (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>  CheckOut(checkout: Checkout(name: '', city: '', 
-              address: '', code:'', country: '', state:'') ,
-              )));
-            })
-        
-          ]),
-        ),
-      ),
-
-    );
-    
-  }
-
-  Widget productCard (Product product){
+     double productprice = double.parse(widget.product.price!);
     return  Padding(
         padding:    const EdgeInsets.fromLTRB(10, 10, 5, 10),
         child: Center(
@@ -148,7 +43,7 @@ class _BagsState extends State<Bags> {
                     color: Theme.of(context).colorScheme.onBackground,
                     
                   ),
-                child: Image.network("${ product.image}"),
+                child: Image.network("${widget. product.image}"),
       
                               ),
                               
@@ -160,7 +55,7 @@ class _BagsState extends State<Bags> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                              "${ product.name}",
+                              "${widget. product.name}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(color: Colors.white, fontSize: 10),
@@ -190,9 +85,14 @@ const Spacer(),
                                       setState(() {
                                         if (quantity >0) {
                                           quantity--;
+                                          if (totalAmount != 0 ) {
+                                            totalAmount =totalAmount-  double.parse(
+                                              widget.product.price!);
+                                              widget.state!();
+                                          }
                                            if (quantity == 0) {
-                                        product.addcart = false;
-                             cart.remove(product);
+                                       widget. product.addcart = false;
+                             cart.remove(widget.product);
 }
                                      
                                         }
@@ -211,7 +111,8 @@ const Spacer(),
                                     child: FloatingActionButton(onPressed:(){
                                       setState(() {
                                           quantity++;
-                                          product.price! * quantity;
+                                          totalAmount = double.parse(widget.product.price!)+ totalAmount;
+                                          widget.product.price! * quantity;
                                           
                                       });
                                     },
@@ -219,19 +120,26 @@ const Spacer(),
                                     ),
                                   ),
                                   const Spacer(),
-                                  
+                                   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: Text(     (double.parse(widget.product.price!) * quantity).toStringAsFixed(2) ,style: const TextStyle(color: Colors.white,fontSize: 10)),
+                                   ),
                                 ],
                               ),
+                              
+
                                
                         ],
                       ),
                     ),
                         ],
                       ),
-          )),
-      );
-  }
-   Widget checkOutbutton(String name,VoidCallback onPressed){
-    return   Button(name: name, onPressed: onPressed);
+          
+          ),
+          
+          )
+          ,
+      ); 
+      
   }
 }

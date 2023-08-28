@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,15 +23,15 @@ class _SettingState extends State<Setting> {
       builder:( context, child) {
                    return Theme(
                     data: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.light(
+                    colorScheme: const ColorScheme.light(
                        primary: Color(0xff363636),
                        onPrimary: Colors.white,
                        onSurface: Colors.white,
                        ),
-                       dialogBackgroundColor: Color(0xff363636),
+                       dialogBackgroundColor: const Color(0xff363636),
                        textButtonTheme: TextButtonThemeData(
                         style: TextButton.styleFrom(
-                          backgroundColor: Color(0xff363636),
+                          backgroundColor: const Color(0xff363636),
                           foregroundColor: Colors.white,
                           textStyle: Theme.of(context).textTheme.bodySmall,
                           primary: Colors.white,
@@ -48,7 +50,7 @@ class _SettingState extends State<Setting> {
 }
 
 
-   bool isSwitchedSales = false;
+   bool isSwitchedSales = true;
   bool isSwitchedNewArrivals = false;
   bool isSwitchedDeliveryStatus = false;
 
@@ -98,7 +100,7 @@ class _SettingState extends State<Setting> {
               )
             ],
           ),
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -241,12 +243,12 @@ class _SettingState extends State<Setting> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Sales",style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16,)),
               ),
-              SizedBox(width: 230,),
+              const SizedBox(width: 230,),
               
               Switch(
-               activeColor: Color(0xff55D85A) ,
-                activeTrackColor: Color(0xff2A2C36) ,
-                inactiveThumbColor:  Color(0xff2A2C36) ,
+               activeColor: const Color(0xff55D85A) ,
+                activeTrackColor: const Color(0xff2A2C36) ,
+                inactiveThumbColor:  const Color(0xff2A2C36) ,
                  value: isSwitchedSales,
                 onChanged: (value){
                
@@ -267,12 +269,12 @@ class _SettingState extends State<Setting> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text("New arrivals",style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16,)),
               ),
-               SizedBox(width: 180,),
+               const SizedBox(width: 180,),
               
               Switch(
-               activeColor: Color(0xff55D85A) ,
-                activeTrackColor: Color(0xff2A2C36) ,
-                inactiveThumbColor:  Color(0xff2A2C36) ,
+               activeColor: const Color(0xff55D85A) ,
+                activeTrackColor: const Color(0xff2A2C36) ,
+                inactiveThumbColor:  const Color(0xff2A2C36) ,
                 value: isSwitchedNewArrivals, 
                 onChanged: (value){
               _updateSwitchStates( 'newArrivals',value);
@@ -289,13 +291,13 @@ class _SettingState extends State<Setting> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Delivery status changes",style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16,)),
               ),
-               SizedBox(width: 90,),
+               const SizedBox(width: 90,),
               
             
               Switch(
-                activeColor: Color(0xff55D85A) ,
-                activeTrackColor: Color(0xff2A2C36) ,
-                inactiveThumbColor:  Color(0xff2A2C36) ,
+                activeColor: const Color(0xff55D85A) ,
+                activeTrackColor: const Color(0xff2A2C36) ,
+                inactiveThumbColor:  const Color(0xff2A2C36) ,
                value:isSwitchedDeliveryStatus,
                 onChanged: (bool value){
               _updateSwitchStates( 'deliveryStatus',value);

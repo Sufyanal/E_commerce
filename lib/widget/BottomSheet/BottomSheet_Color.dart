@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../controller/bottomsheetcontroller.dart';
-class colornamesheet extends StatefulWidget {
-  const colornamesheet({super.key,required this.controller});
+class Colornamesheet extends StatefulWidget {
+  const Colornamesheet({super.key,required this.controller});
 
   final bottomsheetcontroller controller;
 
   @override
-  State<colornamesheet> createState() => _colornamesheetState();
+  State<Colornamesheet> createState() => _ColornamesheetState();
 }
 
-class _colornamesheetState extends State<colornamesheet> {
+class _ColornamesheetState extends State<Colornamesheet> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

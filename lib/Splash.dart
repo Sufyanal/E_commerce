@@ -1,4 +1,4 @@
-import 'package:ecommerce/Screen/Register/SignupScreen.dart';
+import 'package:ecommerce/Screen/Register/signupScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

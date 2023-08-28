@@ -1,14 +1,14 @@
-import 'package:ecommerce/Screen/Profilescreens.dart/MyOrder.dart';
+
 import 'package:flutter/material.dart';
 
-class detail extends StatefulWidget {
-  const detail({super.key});
+class Detail extends StatefulWidget {
+  const Detail({super.key});
 
   @override
-  State<detail> createState() => _detailState();
+  State<Detail> createState() => _DetailState();
 }
 
-class _detailState extends State<detail> {
+class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _detailState extends State<detail> {
         elevation: 0,
       leading: IconButton(
             onPressed:() => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
           title: const Center(child: Text("Order Details",style: TextStyle(fontSize: 18,color: Colors.white),)),
           actions: const [
              Padding(
@@ -83,12 +83,12 @@ class _detailState extends State<detail> {
                ),
           
               // items list
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
                Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Order information",style: TextStyle(fontSize: 14),),
+                  const Text("Order information",style: TextStyle(fontSize: 14),),
                // const SizedBox(height: 20,),
                   _information(),
                   
@@ -111,7 +111,7 @@ Container _items(String assets){
     width: 330,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
-       color: Color((0xff2A2C36),
+       color: const Color((0xff2A2C36),
     ),
   ),
   child: Row(
@@ -213,7 +213,7 @@ Widget _information (){
              Row(
            children: [
              Container(
-              margin: EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(left: 5),
               height:40 ,
               width:150,
               decoration: BoxDecoration(
@@ -233,13 +233,13 @@ Widget _information (){
              ),
              const SizedBox(width: 10,),
               Container(
-              margin: EdgeInsets.only(left: 20),
+              margin: const EdgeInsets.only(left: 20),
               height:40 ,
               width:150,
               decoration: BoxDecoration(
                 
                 borderRadius: BorderRadius.circular(40),
-               color: Color(0xffEF3651)
+               color: const Color(0xffEF3651)
               ),
               child:  GestureDetector(
                    onTap: (){

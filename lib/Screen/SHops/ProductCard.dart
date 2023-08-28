@@ -16,16 +16,18 @@ import '../../model.dart/Category.dart';
 import '../../model.dart/Product_modals.dart';
 import '../../model.dart/Review.dart';
 import '../../widget/BottomSheet/BottomSheet_Color.dart';
-import '../../widget/Button.dart';
+import '../../widget/button.dart';
+import '../../widget/favorait1.dart';
 import 'Rating&Reviews.dart';
 
 
 class ProductCard extends StatefulWidget {
   
   final Product product;
+  Function?state;
    
 
-  const ProductCard({super.key,required this.product});
+  ProductCard({super.key,required this.product,this.state});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -158,24 +160,14 @@ class _ProductCardState extends State<ProductCard> {
                         ],
                       ),),
                   ),
-                   Container(                
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(200),
-                                        color: Theme.of(context).colorScheme.secondary,
-                                      ),
-                                      child:  IconButton(
-                                        
-                                         icon: Icon(
-                                          widget.product.isfavorited?
-                                          Icons.favorite:
-                                          Icons.favorite_border,
-                                          color :   widget.product.isfavorited?Colors.red : Colors.white,
-                                         ),
-                                         onPressed: togglefavorite,
-                                         )
-                                    ),
+                 FavoriteIconButton(
+                         isFavorite: favorite.any(
+                            (element) => element.id == widget.product.id),
+                        favoriteproduct: widget.product,
+                        state: () {
+                          if (widget.state != null) {
+                            widget.state!();
+  }})
                 ],
               ),
             ),
@@ -274,7 +266,7 @@ class _ProductCardState extends State<ProductCard> {
             ),
               Container(
                 height: 350,
-                padding: EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: 
                productModal == null ? const Center(child:  CircularProgressIndicator(color: Colors.white,),) :
                 ListView.builder(
@@ -299,7 +291,7 @@ class _ProductCardState extends State<ProductCard> {
         children: [
           Container(
               color: Theme.of(context).colorScheme.primary,
-              margin: EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
               height: 300,
               width: 120,
               child: Center(
@@ -318,7 +310,7 @@ class _ProductCardState extends State<ProductCard> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 120, right: 5),
+                            margin: const EdgeInsets.only(top: 120, right: 5),
                             height: 50,
                             width: 50,
                             decoration: BoxDecoration(
@@ -342,10 +334,17 @@ class _ProductCardState extends State<ProductCard> {
                     ]),
                      Row(
                        children: [
-                        Icon(Icons.star,color: Colors.yellow,size: 15,),
-                         Icon(Icons.star,color: Colors.yellow,size: 15,),
-                          Icon(Icons.star,color: Colors.yellow,size: 15,),
-                           Icon(Icons.star,color: Colors.yellow,size: 15,),
+                          RatingBar(
+                     initialRating: double.parse(widget.product.rating!),
+                    ignoreGestures: true,
+                    itemSize: 15,
+                    ratingWidget: RatingWidget(
+                      full: const Icon(Icons.star,color: Color(0xffFFBA49),),
+                       half: const Icon(Icons.star,color: Color(0xffFFBA49),),
+                        empty: const Icon(Icons.star,color: Colors.grey,),) ,
+                     onRatingUpdate:((value) {
+                       
+                     })),
                          Text(
                             "${product.rating}",
                             style: const TextStyle(color: Colors.white, fontSize: 10),
@@ -398,7 +397,7 @@ class _ProductCardState extends State<ProductCard> {
       ),
       context: context,
        builder: (BuildContext context){
-       return colornamesheet(controller: controller);
+       return Colornamesheet(controller: controller);
        });
        if(selected != null){
        setState(() {

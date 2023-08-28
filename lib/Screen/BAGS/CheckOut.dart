@@ -6,7 +6,7 @@ import '../../controller/bottomsheetcontroller.dart';
 
 import '../../model.dart/Checkoutmodel.dart';
 import '../../widget/BottomSheet/BottomSheet_Payment.dart';
-import '../../widget/Button.dart';
+import '../../widget/button.dart';
 
 // ignore: must_be_immutable
 class CheckOut extends StatefulWidget {
@@ -33,7 +33,7 @@ class _CheckOutState extends State<CheckOut> {
   @override
 void initState() {
   super.initState();
-   print("${widget.checkout.address}");
+  
 }
   Checkout? checkout;
    bottomsheetcontroller controller = bottomsheetcontroller();

@@ -40,15 +40,15 @@ class _ShortbyState extends State<Shortby> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _Shortby("Popular"),
+                  _shortby("Popular"),
                   const SizedBox(height: 20,),
-                  _Shortby("Newest"),
+                  _shortby("Newest"),
                    const SizedBox(height: 20,),
-                  _Shortby("Customer review"),
+                  _shortby("Customer review"),
                    const SizedBox(height: 20,),
-                  _Shortby("Price: lowest to high"),
+                  _shortby("Price: lowest to high"),
                    const SizedBox(height: 20,),
-                  _Shortby("Price: highest to low"),
+                  _shortby("Price: highest to low"),
             
                 ],
               ),
@@ -58,7 +58,7 @@ class _ShortbyState extends State<Shortby> {
       ],
     );
   }
-   Widget _Shortby (name){
+   Widget _shortby (name){
    return 
       InkWell(
         child: 

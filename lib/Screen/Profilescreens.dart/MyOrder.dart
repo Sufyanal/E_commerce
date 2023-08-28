@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'OrderDetail.dart';
 
-class orders extends StatefulWidget {
-  const orders({super.key});
+class Orders extends StatefulWidget {
+  const Orders({super.key});
 
   @override
-  State<orders> createState() => _ordersState();
+  State<Orders> createState() => _OrdersState();
 }
 
-class _ordersState extends State<orders> {
+class _OrdersState extends State<Orders> {
    int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class _ordersState extends State<orders> {
         elevation: 0,
         leading: IconButton(
             onPressed:() => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
-          actions: [
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
+          actions: const [
              Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(Icons.search,color: Colors.white,),
@@ -43,7 +43,7 @@ class _ordersState extends State<orders> {
               )
             ],
           ),
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -56,7 +56,7 @@ class _ordersState extends State<orders> {
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white
                   ),
-                  child: Center(child: Text("Delivered",style: TextStyle(color: Color(0xff2A2C36),fontSize: 14),)),
+                  child: const Center(child: Text("Delivered",style: TextStyle(color: Color(0xff2A2C36),fontSize: 14),)),
                 ),
                  const SizedBox(width: 30,),
                  Container(
@@ -64,7 +64,7 @@ class _ordersState extends State<orders> {
                   width: 100, 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Color(0xff2A2C36)
+                    color: const Color(0xff2A2C36)
                   ),
                   child: const Center(child: Text("Processing",style: TextStyle(color: Colors.white,fontSize: 14),)),
                 ),
@@ -74,7 +74,7 @@ class _ordersState extends State<orders> {
                   width: 100, 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Color(0xff2A2C36)
+                    color: const Color(0xff2A2C36)
                   ),
                   child: const Center(child: Text("BUY",style: TextStyle(color: Colors.white,fontSize: 14),)),
                 ),
@@ -86,26 +86,26 @@ class _ordersState extends State<orders> {
                     borderRadius: BorderRadius.circular(30),
                     color: const Color(0xff2A2C36)
                   ),
-                  child: Center(child: Text("Cancelled",style: TextStyle(color: Colors.white,fontSize: 14),)),
+                  child: const Center(child: Text("Cancelled",style: TextStyle(color: Colors.white,fontSize: 14),)),
                 ),
                
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
            Expanded(
              child: SingleChildScrollView
              (
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  _OrderCard(),
+                  orderCard(),
                   const SizedBox(height: 10,),
-                  _OrderCard(),
+                  orderCard(),
                    const SizedBox(height: 10,),
-                  _OrderCard(),
+                  orderCard(),
                    const SizedBox(height: 10,),
-                  _OrderCard(),
+                  orderCard(),
                 ],
               ),
               ),
@@ -115,14 +115,14 @@ class _ordersState extends State<orders> {
       ),
     );
   }
-  Container _OrderCard(){
+  Container orderCard(){
     return Container(
      height: 180,
      width: 340,
   
      decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
-       color: Color((0xff2A2C36),
+       color: const Color((0xff2A2C36),
      ),),
      child:  Column(
       children: [
@@ -168,11 +168,11 @@ class _ordersState extends State<orders> {
             ],
             
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
            Row(
          children: [
            Container(
-            margin: EdgeInsets.only(left: 20),
+            margin: const EdgeInsets.only(left: 20),
             height:40 ,
             width:100,
             decoration: BoxDecoration(
@@ -185,7 +185,7 @@ class _ordersState extends State<orders> {
             ),
             child:  GestureDetector(
                  onTap: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> detail()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const Detail()));
                  },
               child: const Center(
                 child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 14),))),

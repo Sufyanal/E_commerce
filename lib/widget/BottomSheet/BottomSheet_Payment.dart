@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../controller/bottomsheetcontroller.dart';
-import '../Button.dart';
+import '../button.dart';
 
 class PaymentCards extends StatefulWidget {
   const PaymentCards({super.key,required this.controller});
@@ -41,11 +41,11 @@ class _PaymentCardsState extends State<PaymentCards> {
                     const SizedBox(height:10,),
                 Center(child: Text("Add new card",style: Theme.of(context).textTheme.bodyLarge,)),
                 const SizedBox(height: 10,),
-                textField( "Name on card", Text("")),
+                textField( "Name on card", const Text("")),
                 const SizedBox(height: 10,),
                  textField( "Card number", Image.asset("Assets/card.png")),
                  const SizedBox(height: 10,),
-                 textField( "Expire Date", Text("")),
+                 textField( "Expire Date", const Text("")),
                  const SizedBox(height: 10,),
                  textField( "CVV", const Icon(Icons.help_outline,color: Colors.white,)),
                   const SizedBox(height: 10,),
@@ -54,7 +54,7 @@ class _PaymentCardsState extends State<PaymentCards> {
                     Checkbox(
                      
                        activeColor: Colors.amber,
-                      value:this.value,
+                      value:value,
                      onChanged: (value){
                        setState(() {
                          this.value = value!;

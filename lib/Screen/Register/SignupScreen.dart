@@ -2,7 +2,7 @@
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:ecommerce/Screen/Register/Login.dart';
+import 'package:ecommerce/Screen/Register/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
@@ -62,22 +62,36 @@ class _SingupState extends State<SignupScreen> {
           context,
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return Login();
+              return const Login();
             },
           ),
         );
        });
       
       } else {
-        const Text(
-          'Failed',
-          style: TextStyle(color: Colors.white),
-        );
-        print("Failed");
-        toast("Please correct information");
+       setState(() {
+          showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Incomplete Information"),
+                        content: const Text("Please fill in all the address details."),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context); // Close the dialog
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+       });
       }
+    // ignore: empty_catches
     } catch (e) {
-      print(e.toString());
+      
     }
   }
 
@@ -86,7 +100,7 @@ class _SingupState extends State<SignupScreen> {
  
 
   
-  String? _password;
+
  
   @override
   Widget build(BuildContext context) {
@@ -95,8 +109,8 @@ class _SingupState extends State<SignupScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-            onPressed:() => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+            onPressed:() {},
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -129,13 +143,16 @@ class _SingupState extends State<SignupScreen> {
                      setState(() {
                        _isNameTextFieldEmpty = value.isEmpty;
                      });
-                     
+                     const TextStyle(
+                      fontSize: 15
+                     );
                    },
                     onFieldSubmitted: (p0) {
                        setState(() {
                          shouldAutoValidateName = true;
                        });
                      },
+                     
                        validator: (value) {
                        if (value!.isEmpty) {
                          return 'This field is required';
@@ -149,28 +166,31 @@ class _SingupState extends State<SignupScreen> {
                    style: Theme.of(context).textTheme.bodyLarge,
                    textInputAction: TextInputAction.next,
                  decoration: InputDecoration(
+                  errorStyle: const TextStyle(
+                    fontSize: 14
+                  ),
                     suffixIcon: Padding(
-                     padding:  EdgeInsets.only(right: 10),
+                     padding:  const EdgeInsets.only(right: 10),
                      child: Icon(
                        _isNameTextFieldEmpty ? Icons.close:Icons.done,
                        size: 30,
                        color:_isNameTextFieldEmpty ? const Color(0xffFF2424) :const Color(0xff55D85A)
                      ),
                    ),
-                    fillColor: Color(0xff2A2C36),
+                    fillColor: const Color(0xff2A2C36),
                    filled: true,
                   hintText: "Full name",
                  labelText: "Name",
-                   labelStyle: TextStyle(
+                   labelStyle: const TextStyle(
                      color: Colors.grey,
                      fontSize: 20,
                    ),
                    focusColor: Colors.blue,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                    color: Color(0xff828282),
                    fontWeight: FontWeight.w400
                   ),
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                    borderSide: BorderSide(
                      color: Color(0xff828282),
                    ),
@@ -213,13 +233,16 @@ class _SingupState extends State<SignupScreen> {
                         style: Theme.of(context).textTheme.bodyLarge,
                      textInputAction: TextInputAction.next,
                    decoration:  InputDecoration(
+                    errorStyle: const TextStyle(
+                    fontSize: 14
+                  ),
                       suffixIcon: Padding(
                        padding: const EdgeInsets.only(right: 10),
                        child: Icon(
                          
                          _isEmailTextFieldEmpty ? Icons.close:Icons.done,
                          size: 30,              
-                         color:_isTextFieldEmpty ? const Color(0xffFF2424) :const Color(0xff55D85A)
+                         color:_isEmailTextFieldEmpty ? const Color(0xffFF2424) :const Color(0xff55D85A)
                        ),
                      ),
                      fillColor: const Color(0xff2A2C36),
@@ -230,11 +253,11 @@ class _SingupState extends State<SignupScreen> {
                        fontSize: 20,
                      ),
                     hintText: "Email Address",
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                      color: Color(0xff828282),
                      fontWeight: FontWeight.w400
                     ),
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                      borderSide: BorderSide(
                        color: Color(0xff828282),
                      ),
@@ -256,7 +279,7 @@ class _SingupState extends State<SignupScreen> {
                             style: Theme.of(context).textTheme.bodyLarge,
                          textInputAction: TextInputAction.done,
                        decoration:  InputDecoration(
-                          fillColor: Color(0xff2A2C36),
+                          fillColor: const Color(0xff2A2C36),
                          filled: true,
                          suffixIcon: IconButton(
                            onPressed: (){
@@ -269,6 +292,9 @@ class _SingupState extends State<SignupScreen> {
                             : Icons.visibility,color: Colors.white,
                             )
                             ),
+                            errorStyle: const TextStyle(
+                    fontSize: 14
+                  ),
                         hintText: "Password",
                         hintStyle: const TextStyle(
                          color: Color(0xff828282),
@@ -306,7 +332,7 @@ class _SingupState extends State<SignupScreen> {
                    children: [
                      GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const Login()));
                       },
                        child: const Text("Already have an account?",
                          style:TextStyle(

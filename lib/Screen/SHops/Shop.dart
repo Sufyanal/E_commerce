@@ -43,12 +43,12 @@ class _ShopState extends State<Shop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff1E1F28),
+        backgroundColor: const Color(0xff1E1F28),
      appBar: AppBar(
         elevation: 0,
          leading: IconButton(
             onPressed:() => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
           title: Text("Categories",style: Theme.of(context).textTheme.bodyLarge,),
           actions: const [
              Padding(
@@ -62,7 +62,7 @@ class _ShopState extends State<Shop> {
         children: [
           
           Container(
-            margin: EdgeInsets.only(top: 30),
+            margin: const EdgeInsets.only(top: 30),
                   decoration:   BoxDecoration(
                      borderRadius: const BorderRadius.all(Radius.circular(30)),
                      color: Theme.of(context).colorScheme.error

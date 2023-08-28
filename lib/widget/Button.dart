@@ -22,6 +22,6 @@ class Button extends StatelessWidget {
                        child: Text(name,style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: const Color(0xffF5F5F5),),), 
                       ),
                       ),
-                  );;
+                  );
   }
 }

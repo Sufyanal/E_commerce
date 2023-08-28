@@ -1,9 +1,11 @@
 
 
 
-import 'package:ecommerce/Screen/SHops/ProductCard.dart';
+import 'package:ecommerce/Screen/sHops/ProductCard.dart';
 import 'package:ecommerce/main.dart';
+import 'package:ecommerce/widget/favorait1.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import '../../controller/bottomsheetcontroller.dart';
 import '../../model.dart/Category.dart';
@@ -88,13 +90,13 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              _TagSalection("T-shirts"),
+              _tagSalection("T-shirts"),
               const SizedBox(width: 10,),
-                _TagSalection("Crop tops"),
+                _tagSalection("Crop tops"),
               const SizedBox(width: 10,),
-                _TagSalection("Sleeveless"),
+                _tagSalection("Sleeveless"),
               const SizedBox(width: 10,),
-                _TagSalection("Shirts"),
+                _tagSalection("Shirts"),
               const SizedBox(width: 10,),
             ],
           ),
@@ -125,7 +127,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
             itemCount: productModal!.products!.length,
             itemBuilder: (context,index){
               final product = productModal!.products![index];
-              return _ProductCard_Categories(product);
+              return _productCardCategories(product);
             },
            
           ),
@@ -139,7 +141,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
    );
   }
 
-  Container _TagSalection(name){
+  Container _tagSalection(name){
     return Container(
       height: 30,
       width: 100,
@@ -151,7 +153,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
     );
   }
 
-  Widget _ProductCard_Categories(Product product){
+  Widget _productCardCategories(Product product){
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCard(product: product)));
@@ -160,7 +162,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
         padding:    const EdgeInsets.fromLTRB(10, 10, 5, 10),
         child: Center(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
                 width: 350,
                 height: 104,
                 decoration: BoxDecoration(
@@ -208,10 +210,17 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                           
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                 Icon(Icons.star,color: Colors.yellow,size: 15,),
-                               Icon(Icons.star,color: Colors.yellow,size: 15,),
-                                Icon(Icons.star,color: Colors.yellow,size: 15,),
-                                 Icon(Icons.star,color: Colors.yellow,size: 15,),
+                                RatingBar(
+                     initialRating: double.parse(product.rating!),
+                    ignoreGestures: true,
+                    itemSize: 15,
+                    ratingWidget: RatingWidget(
+                      full: const Icon(Icons.star,color: Color(0xffFFBA49),),
+                       half: const Icon(Icons.star,color: Color(0xffFFBA49),),
+                        empty: const Icon(Icons.star,color: Colors.grey,),) ,
+                     onRatingUpdate:((value) {
+                       
+                     })),
                                Text(
                                   "${product.rating}",
                                   style: const TextStyle(color: Colors.white, fontSize: 10),
@@ -232,30 +241,18 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                      
                        children: [
                          Container(
-                                    margin: EdgeInsets.only(top: 80, right: 5),
+                                    margin: const EdgeInsets.only(top: 90, right: 5),
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(200),
                                       color: Theme.of(context).colorScheme.secondary,
                                     ),
-                                    child: IconButton(
-                                  onPressed: (){
-                                    togglefavorite(product);
-                                  },
-                   icon: Icon(
-                    
-                        product.isfavorited ? Icons.favorite : Icons.favorite_border,
-                     color: product.isfavorited ? Colors.red : Colors.white,
-                     size: 30,
-  ),
-),
-
-                                    // child: Icon(
-                                    //   Icons.favorite_border_outlined,
-                                    //   color: Colors.white,
-                                    // ),
-                                  ),
+                                    child: FavoriteIconButton(
+                                      favoriteproduct: product,
+                                       isFavorite: favorite.any((element) => element.id == product.id)
+                                       
+                                       ),)
                        ],
                      ),
                         ],

@@ -1,26 +1,7 @@
-
-
-
-
-import 'package:ecommerce/Screen/Register/SignupScreen.dart';
-import 'package:ecommerce/Screen/Register/VisualSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
-
-
-
-import 'Screen/Home_Screen.dart';
-
-import 'Screen/Register/Login.dart';
-import 'Screen/Register/Visual.dart';
-import 'Splash.dart';
+import 'splash.dart';
 import 'model.dart/Product_modals.dart';
-import 'model.dart/Review.dart';
-
-
-
 
 
 void main() {
@@ -84,7 +65,7 @@ class MyApp extends StatelessWidget {
             )
        ) 
       ),
-      home: Splash1(),
+      home: const Splash1(),
       debugShowCheckedModeBanner: false,
     );
   }

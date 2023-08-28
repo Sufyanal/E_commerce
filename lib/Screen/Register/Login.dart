@@ -21,8 +21,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _Useremailcontroller = TextEditingController();
-  TextEditingController _Userpasswordcontroller = TextEditingController();
+  TextEditingController useremailcontroller = TextEditingController();
+  TextEditingController userpasswordcontroller = TextEditingController();
 
 
 
@@ -67,15 +67,33 @@ class _LoginState extends State<Login> {
         });
        
       } else {
-       toast("Please correct Vaild password & Email");
-            setState(() {
-              _Userpasswordcontroller.text ='';   
-              
+     setState(() {
+              userpasswordcontroller.text ='';   
+               showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: Theme.of(context).colorScheme.secondary,
+                        shadowColor: Theme.of(context).colorScheme.secondary,
+                        title: const Text("Incomplete Information",style:  TextStyle(color: Colors.white),),
+                        content: const Text("Please correct password and email.",style: TextStyle(color: Colors.white),),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context); // Close the dialog
+                            },
+                            child: const Text("OK",style: TextStyle(color: Colors.white) ,),
+                          ),
+                        ],
+                      );
+                    },
+                  );
             });
-        print("Failed");
+        
       }
+    // ignore: empty_catches
     } catch (e) {
-      print(e.toString());
+
     }
   }
 
@@ -95,7 +113,7 @@ class _LoginState extends State<Login> {
         elevation: 0,
         leading: IconButton(
             onPressed:() => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
       resizeToAvoidBottomInset: false,
       body: Center(
@@ -125,7 +143,7 @@ class _LoginState extends State<Login> {
           });
         },
                     // enabled: false,
-                    controller: _Useremailcontroller,
+                    controller: useremailcontroller,
                     style: Theme.of(context).textTheme.bodyLarge,
                     textInputAction: TextInputAction.next,
                   decoration:  InputDecoration(
@@ -171,7 +189,7 @@ class _LoginState extends State<Login> {
                 child: SingleChildScrollView(
                   child: TextFormField(
                   //  enabled: false,
-                    controller: _Userpasswordcontroller,
+                    controller: userpasswordcontroller,
                    obscuringCharacter: "*",
                        style: Theme.of(context).textTheme.bodyLarge,
                     textInputAction: TextInputAction.done,
@@ -242,13 +260,13 @@ class _LoginState extends State<Login> {
                    
                    if (!_isTextFieldEmpty) {
         login(
-          _Useremailcontroller.text.toString(),
-          _Userpasswordcontroller.text.toString(),
+          useremailcontroller.text.toString(),
+          userpasswordcontroller.text.toString(),
         );
           }
                    setState(() {
-                                _isTextFieldEmpty =  _Useremailcontroller.text.isEmpty ;
-                               _isTextFieldEmpty = _Userpasswordcontroller.text.isEmpty;
+                                _isTextFieldEmpty =  useremailcontroller.text.isEmpty ;
+                               _isTextFieldEmpty = userpasswordcontroller.text.isEmpty;
                               });
                               
                             },
@@ -269,7 +287,7 @@ class _LoginState extends State<Login> {
                  ),
                 ),
               ),
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
                 Text("Or sign up with social account",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14),),
                  const SizedBox(height: 10,),
                 Row(

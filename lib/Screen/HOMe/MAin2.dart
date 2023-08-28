@@ -5,9 +5,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import '../../main.dart';
+
 import '../../model.dart/Product_modals.dart';
+
+import '../../widget/productCard/product.dart';
 import '../SHops/ProductCard.dart';
 
 class Main2 extends StatefulWidget {
@@ -37,24 +39,11 @@ class _Main2State extends State<Main2> {
     });
     
    }
-    void togglefavorite(Product product){
-    setState(() {
-     product.isfavorited  = !product.isfavorited;
-     if ( product.isfavorited) {
-        favorite.add( product);
-      } else {
-        favorite.remove( product);
-      }
-    });
-   }
- 
-    
-
   @override
   void initState(){
     super.initState();
     getProduct();
-    _timer = Timer.periodic(Duration(seconds: 2),
+    _timer = Timer.periodic(const Duration(seconds: 2),
      (Timer timer) {
      if (_currentPage <4 ) {
       _currentPage++;
@@ -63,7 +52,7 @@ class _Main2State extends State<Main2> {
      }
       _pageController.animateToPage(
       _currentPage,
-       duration: Duration(milliseconds: 300),
+       duration: const Duration(milliseconds: 300),
        curve: Curves.easeIn);
      });
     
@@ -81,8 +70,8 @@ class _Main2State extends State<Main2> {
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
-          Container(
-            height: 250,
+          SizedBox(
+            height: 280,
            
             child:PageView(
              
@@ -96,7 +85,7 @@ class _Main2State extends State<Main2> {
             
             ),
           ),
-           SizedBox(
+           const SizedBox(
                 height: 5,
               ),
               Padding(
@@ -107,7 +96,7 @@ class _Main2State extends State<Main2> {
                       "Sale",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text("View all",
                         style: Theme.of(context)
                             .textTheme
@@ -119,7 +108,7 @@ class _Main2State extends State<Main2> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text("You’ve never seen it before!",
@@ -130,8 +119,8 @@ class _Main2State extends State<Main2> {
                 ],
               ),
               Container(
-                height: 280,
-                padding: EdgeInsets.only(right: 10),
+                height: 350,
+                padding: const EdgeInsets.only(right: 10),
                 child: 
                 salesitem == null ? const Center(child:  CircularProgressIndicator(color: Colors.white,),) :
                 ListView.builder(
@@ -139,7 +128,15 @@ class _Main2State extends State<Main2> {
                     itemCount: salesitem!.products!.length,
                     itemBuilder: (context, index) {
                       final product = salesitem!.products![index];
-                      return _product_card(product);
+                      return GestureDetector(
+                        child: Productlist(
+                          product: product,
+                         isFavorite: favorite.any((element) => element.id == product.id) 
+                         ),
+                         onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductCard(product: product)));
+                         },
+                      );
                     }),
               ),
             Padding(
@@ -150,7 +147,7 @@ class _Main2State extends State<Main2> {
                     "New",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text("View all",
                       style: Theme.of(context)
                           .textTheme
@@ -162,7 +159,7 @@ class _Main2State extends State<Main2> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text("You’ve never seen it before!",
@@ -174,7 +171,7 @@ class _Main2State extends State<Main2> {
             ),
                Container(
                 height: 350,
-                padding: EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: 
                 newitems == null ? const Center(child:  CircularProgressIndicator(color: Colors.white,),) :
                 ListView.builder(
@@ -182,7 +179,15 @@ class _Main2State extends State<Main2> {
                     itemCount: newitems!.products!.length,
                     itemBuilder: (context, index) {
                       final product = newitems!.products![index];
-                      return _product1_card(product);
+                      return GestureDetector(
+                        child: Productlist(
+                          product: product,
+                         isFavorite: favorite.any((element) => element.id == product.id) 
+                         ),
+                         onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductCard(product: product)));
+                         },
+                      );
                     }),
               ),
         ],
@@ -192,186 +197,14 @@ class _Main2State extends State<Main2> {
     );
   }
 
-  Container _container (image){
-    return Container(
+  Widget _container (image){
+    return SizedBox(
     height: 100,
       width: 200,
       child: Image.network(image,width:500,),
     );
   }
 
-    Widget _product_card(Product product) {
-    return GestureDetector(
-       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCard(product: product)));
-      },
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 5, 0),
-        child: Column(
-          children: [
-            Container(
-                color: Theme.of(context).colorScheme.primary,
-                margin: EdgeInsets.all(8.0),
-                height: 250,
-                width: 120,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(children: [
-                        Container(
-                          height: 150,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white),
-                          child: Image.network("${product.image}"),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 130, right: 5),
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(200),
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              child: Center(
-                                child: IconButton(onPressed:()=> togglefavorite(product)
-                                    , icon: Icon(
-                                      product.isfavorited?
-                                      Icons.favorite:
-                                      Icons.favorite_border,
-                                      color: product.isfavorited ? Colors.red : Colors.white,
-                                  size: 20,
-                                    )),
-                              )
-                            ),
-                          ],
-                        ),
-                        
-                      ]),
-                       Row(
-                         children: [
-                          Icon(Icons.star,color: Colors.yellow,size: 15,),
-                           Icon(Icons.star,color: Colors.yellow,size: 15,),
-                            Icon(Icons.star,color: Colors.yellow,size: 15,),
-                             Icon(Icons.star,color: Colors.yellow,size: 15,),
-                           Text(
-                              "${product.rating}",
-                              style: const TextStyle(color: Colors.white, fontSize: 10),
-                            ),
-                         ],
-                       ),
-                      Text(
-                          "${product.name}",
-                          style: const TextStyle(color: Colors.white, fontSize: 10),
-                           overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          "${product.price}",
-                          style: const TextStyle(color: Color(0xffEF3651), fontSize: 10),
-                        )
-                    ],
-                  ),
-                )),
-          ],  
-        ),
-      ),
-    );
-  }
- 
-
-  
-    Widget _product1_card(Product product) {
-    return GestureDetector(
-       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCard(product: product)));
-      },
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                color: Theme.of(context).colorScheme.primary,
-                margin: EdgeInsets.all(8.0),
-                height: 300,
-                width: 120,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(children: [
-                        Container(
-                          height: 150,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white),
-                          child: Image.network("${product.image}"),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 130, right: 5),
-                             height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(200),
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              child: IconButton(onPressed: ()=>togglefavorite(product)
-                                  , icon: Icon(
-                                    product.isfavorited?
-                                    Icons.favorite:
-                                    Icons.favorite_border,
-                                    color: product.isfavorited ? Colors.red : Colors.white,
-                              
-                                  ))
-                            ),
-                          ],
-                        ),
-                        
-                      ]),
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                          Icon(Icons.star,color: Colors.yellow,size: 15,),
-                           Icon(Icons.star,color: Colors.yellow,size: 15,),
-                            Icon(Icons.star,color: Colors.yellow,size: 15,),
-                             Icon(Icons.star,color: Colors.yellow,size: 15,),
-                           Text(
-                              "${product.rating}",
-                              style: const TextStyle(color: Colors.white, fontSize: 10),
-                            ),
-                         ],
-                       ),
-                      Text(
-                        
-                          "${product.name}",
-                          style: const TextStyle(color: Colors.white, fontSize: 10),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          "${product.price}",
-                         style: const TextStyle(color: Color(0xffEF3651), fontSize: 10),
-                        )
-                    ],
-                  ),
-                )),
-          ],
-        ),
-      ),
-    );
-  }
 
   
 }

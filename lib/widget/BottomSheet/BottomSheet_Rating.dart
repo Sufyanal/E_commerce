@@ -27,28 +27,31 @@ class _RatingSheetState extends State<RatingSheet> {
       http.Response response = await post(
           Uri.parse('https://ecommerce.salmanbediya.com/products/review/add'),
           body: {
-            'product': widget.controller.toString(), // Replace with appropriate logic
-          'user': widget.controller.toString(), // Replace with appropriate logic
+          'product': widget.controller.toString(), 
+          'user': widget.controller.toString(), 
           'rating': rating.toString(),
           'reviewText': reviewText, });
     if (response.statusCode == 200) {
     
-      Navigator.pop(context);
-    
-        // Review posted successfully
-        print('Review posted successfully');
+     setState(() {
+       Navigator.pop(context);
+     });
+      
+
+        
       } else {
-        // Handle error
-        print('Error posting review');
+      
       }
+    // ignore: empty_catches
     } catch (e) {
-      print('Error: $e');
+ 
     }}
   
 
-  
+   Product? product;
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       resizeToAvoidBottomInset: false,
   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -68,7 +71,7 @@ class _RatingSheetState extends State<RatingSheet> {
             Text("What is you rate?",style: Theme.of(context).textTheme.bodyLarge,),
             const SizedBox(height: 30,),
           RatingBar.builder(
-   initialRating: 0,
+   initialRating: double.parse(product!.rating!),
    minRating: 1,
    direction: Axis.horizontal,
    allowHalfRating: true,
@@ -79,7 +82,7 @@ class _RatingSheetState extends State<RatingSheet> {
      color: Colors.white,
    ),
    onRatingUpdate: (rating) {
-     print(rating);
+     
    },
 ),
           

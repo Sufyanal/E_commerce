@@ -1,5 +1,5 @@
-import 'package:ecommerce/Screen/BAGS/Bags.dart';
-import 'package:ecommerce/widget/Button.dart';
+import 'package:ecommerce/Screen/BAGS/bags.dart';
+import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 class Success extends StatefulWidget {

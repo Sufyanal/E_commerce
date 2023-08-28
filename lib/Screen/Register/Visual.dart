@@ -26,7 +26,7 @@ class _VisualState extends State<Visual> {
         title: Text('Visual search',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),),
        leading: IconButton(
             onPressed:() => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
 
       body: Container(
@@ -53,14 +53,13 @@ class _VisualState extends State<Visual> {
                  final ImagePicker picker = ImagePicker();
                   XFile? image = await picker.pickImage(
                         source: ImageSource.camera);
-                    print(image?.name);
-                    print(image?.path);
+                    
                     if (image == null) {
                       setState(() {
                        image = image!;
                       });
                     }
-                    if (this.mounted) {
+                    if (mounted) {
         await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => Splash(
@@ -94,27 +93,28 @@ class _VisualState extends State<Visual> {
                final ImagePicker picker = ImagePicker();
                     XFile? image = await picker.pickImage(
                         source: ImageSource.gallery);
-                    print(image?.name);
-                    print(image?.path);
+                   
                     if (image != null) {
                       setState(() {
                       pickimage = File(image.path);
                       });
                     }
-                 
-         Navigator.of(context).push(
+                 setState(() {
+                  Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => Splash(
               image:pickimage!,
             ),
           ),
-        );
+        );   
+                 });
+       
     
               },
               child: Center(
                 child: Container(
                   decoration:    BoxDecoration(
-                     borderRadius:  BorderRadius.all(Radius.circular(20)),
+                     borderRadius:  const BorderRadius.all(Radius.circular(20)),
                      color: Theme.of(context).colorScheme.error,
                      backgroundBlendMode: BlendMode.screen,
                    

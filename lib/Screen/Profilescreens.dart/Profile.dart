@@ -1,23 +1,21 @@
-import 'dart:convert';
 
-import 'package:ecommerce/Screen/Profilescreens.dart/MyOrder.dart';
+
+import 'package:ecommerce/Screen/Profilescreens.dart/myOrder.dart';
 import 'package:ecommerce/Screen/Profilescreens.dart/Setting.dart';
 import 'package:ecommerce/main.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
-import '../../model.dart/Review.dart';
 
-class Profil extends StatefulWidget {
-  const Profil({super.key});
+
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   
 
   @override
-  State<Profil> createState() => _ProfilState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _ProfilState extends State<Profil> {
+class _ProfileState extends State<Profile> {
 
   
      
@@ -52,7 +50,7 @@ class _ProfilState extends State<Profil> {
               )
             ],
           ),
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
            Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -61,7 +59,7 @@ class _ProfilState extends State<Profil> {
                backgroundImage: AssetImage("Assets/bg.png"),
                
               ),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
              
       Column(
         children: [
@@ -83,7 +81,7 @@ class _ProfilState extends State<Profil> {
                      children: [
                        GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const orders()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const Orders()));
                         },
                          child: ListTile(
                        title: Text("My orders",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16),),

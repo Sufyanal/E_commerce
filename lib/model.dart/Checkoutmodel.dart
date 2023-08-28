@@ -25,13 +25,13 @@ class Checkout{
   }
 
   Map <String,dynamic> toJson(){
-    final Map<String,dynamic> data = new Map<String,dynamic>();
-    data['name'] = this.name;
-    data[' city'] = this. city;
-    data[' address'] = this. address;
-    data[' code '] = this. code ;
-    data ['country']= this.country;
-    data['state']= this.state;
+    final Map<String,dynamic> data = <String,dynamic>{};
+    data['name'] = name;
+    data[' city'] =  city;
+    data[' address'] =  address;
+    data[' code '] =  code ;
+    data ['country']= country;
+    data['state']= state;
     return data;
   }
 }

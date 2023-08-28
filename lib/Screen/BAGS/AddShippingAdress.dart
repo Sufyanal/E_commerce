@@ -1,7 +1,7 @@
-import 'package:ecommerce/Screen/BAGS/CheckOut.dart';
+import 'package:ecommerce/Screen/BAGS/checkOut.dart';
 import 'package:flutter/material.dart';
 import '../../model.dart/Checkoutmodel.dart';
-import '../../widget/Button.dart';
+import '../../widget/button.dart';
 
 class Address extends StatefulWidget {
   const Address({super.key});
@@ -76,7 +76,7 @@ void initState() {
                const SizedBox(height: 20,),
                savebutton("Save", 
                () {
-               print(name);
+              
                 
               if (name != null && address != null && city != null && state != null && code != null && country != null) {
           setState(() {
@@ -88,14 +88,14 @@ void initState() {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Incomplete Information"),
-                        content: Text("Please fill in all the address details."),
+                        title: const Text("Incomplete Information"),
+                        content: const Text("Please fill in all the address details."),
                         actions: [
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context); // Close the dialog
                             },
-                            child: Text("OK"),
+                            child: const Text("OK"),
                           ),
                         ],
                       );

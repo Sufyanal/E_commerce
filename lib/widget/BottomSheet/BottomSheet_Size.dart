@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../controller/bottomsheetcontroller.dart';
-import '../Button.dart';
+import '../button.dart';
 
 
 class SizeBottomsheet extends StatefulWidget {
@@ -36,16 +36,16 @@ class _SizeBottomsheetState extends State<SizeBottomsheet> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _SizeTag("XS"),
-                _SizeTag("S"),
-                _SizeTag("M"),
+                sizeTag("XS"),
+                sizeTag("S"),
+                sizeTag("M"),
                  ],
             ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    _SizeTag("L"),
-                    _SizeTag("XL"),
+                    sizeTag("L"),
+                    sizeTag("XL"),
                   ],
                 ),
                 const SizedBox(height: 30,),
@@ -65,7 +65,7 @@ class _SizeBottomsheetState extends State<SizeBottomsheet> {
        );
       
   }
-   Widget _SizeTag (name){
+   Widget sizeTag (name){
    return 
       GestureDetector(
         onTap: () {

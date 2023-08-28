@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lottie/lottie.dart';
-
-
-
 import '../main.dart';
 import '../model.dart/Product_modals.dart';
 
@@ -28,14 +25,17 @@ void toggleAddtoCart(Product product){
   });
 
 }
+void state() => setState(() {});
 
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
          appBar: AppBar(
+          leading:  const Icon(Icons.arrow_back_ios,color: Colors.white,),
        actions:const [
         Padding(
+          
           padding: EdgeInsets.all(8.0),
           child: Icon(Icons.search,color: Colors.white,),
         ),
@@ -77,7 +77,7 @@ void toggleAddtoCart(Product product){
         padding:    const EdgeInsets.fromLTRB(10, 10, 5, 10),
         child: Center(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
                 width: 350,
                 height: 104,
                 decoration: BoxDecoration(
@@ -191,7 +191,7 @@ void toggleAddtoCart(Product product){
                                     child: IconButton(
                                   
                                   
-                   icon:  Icon(
+                   icon:  const Icon(
                       
                       
                                             Icons.shopping_bag,
